@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
+
 
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   homeCountry: { type: String, required: true },
-  travelLog: [{ type: Schema.Types.ObjectId, ref: 'Country' }],
-
+  travelLog: [{ type: ObjectId, ref: 'Country' }],
 }, {
   timestamps: true,
 });
