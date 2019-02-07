@@ -47,9 +47,8 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-
 router.get('/signup', (req, res, next) => {
-  res.render('partials/signup', { errorMessage: undefined });
+  res.render('signup');
 });
 
 router.post('/signup', (req, res, next) => {
