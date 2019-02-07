@@ -101,7 +101,7 @@ Countries model
 ## Process
 
 - Planing: writing this readme and designing the wireframes
-![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/wireframes.jpeg)
+![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/wireframes.jpeg)
 
 - MVP will be created through pair programming.
 - Backlog will be made in collaborative mode spliting tasks.
@@ -113,7 +113,7 @@ Countries model
 https://trello.com/b/WFXytC9n/travellog
 
 Our Kanban board:
-![alt Kanban board](https://github.com/MR-Neto/TravelLog/blob/master/kanban.jpeg)
+![alt Kanban board](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/kanban.jpeg)
 
 
 ### Git
