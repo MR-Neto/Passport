@@ -103,13 +103,13 @@ attendees: [ObjectId<User>]
 
 ### Trello
 
-[Link to your trello board](https://trello.com) or picture of your physical board
+[Link to your trello board](https://trello.com/b/WFXytC9n/travellog) 
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Repository Link](http://github.com)
+[Repository Link](https://github.com/MR-Neto/TravelLog)
 
 [Deploy Link](http://heroku.com)
 
