@@ -10,6 +10,42 @@ router.get('/login', (req, res, next) => {
   res.render('login');
 });
 
+router.post('/login', (req, res, next) => {
+  console.log("POST LOGIN");
+  const { username, password } = req.body;
+
+  if (username === '' || password === '') {
+    // res.render('partials/users', {
+    //   user: undefined,
+    //   errorMessage: 'Indicate a username and a password to sign up'
+    // });
+    return;
+  }
+
+  User.findOne({ username })
+    .then((user) => {
+      if (!user) {
+        // res.render('partials/users', {
+        //   user: undefined,
+        //   errorMessage: "The username doesn't exist"
+        // });
+        return;
+      }
+      if (bcrypt.compareSync(password, user.password)) {
+        // Save the login in the session!
+        req.session.currentUser = user;
+        res.redirect('/travelLog');
+      } else {
+        // res.render('partials/users', {
+        //   user: undefined,
+        //   errorMessage: 'Incorrect user or password'
+        // });
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
 
 router.get('/signup', (req, res, next) => {
@@ -52,41 +88,6 @@ router.post('/signup', (req, res, next) => {
 
 });
 
-router.post('/login', (req, res, next) => {
-  const { username, password } = req.body;
-
-  if (username === '' || password === '') {
-    res.render('partials/users', {
-      user: undefined,
-      errorMessage: 'Indicate a username and a password to sign up'
-    });
-    return;
-  }
-
-  User.findOne({ username })
-    .then((user) => {
-      if (!user) {
-        res.render('partials/users', {
-          user: undefined,
-          errorMessage: "The username doesn't exist"
-        });
-        return;
-      }
-      if (bcrypt.compareSync(password, user.password)) {
-        // Save the login in the session!
-        req.session.currentUser = user;
-        res.redirect('/users/profile');
-      } else {
-        res.render('partials/users', {
-          user: undefined,
-          errorMessage: 'Incorrect user or password'
-        });
-      }
-    })
-    .catch(error => {
-      next(error)
-    })
-});
 
 router.get('/logout', (req, res, next) => {
   req.session.destroy((err) => {
