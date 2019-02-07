@@ -1,3 +1,17 @@
-<h1>Welcome <%= user.username %></h1>
+<%- include partials/headerLoggedIn.ejs %>
+<h1>Welcome <%= locals.currentUser.username %></h1>
 
-<a href="/users/logout">Log Out</a> 
+<h2>Profile</h2>
+<form class="form" action="/profile" method="POST">
+
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder=<%= locals.currentUser.username %> required>
+
+  <label for="homeCountry">Home country</label>
+  <input type="text" name="homeCountry" placeholder=<%= locals.currentUser.homeCountry %> required>
+
+  <button type="submit">Save</button>
+</form>
+<form action="/profile/delete" method='POST'>
+  <button type="submit">Delete</button>
+</form>

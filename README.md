@@ -69,7 +69,7 @@ Error:
 | /auth/signup  | POST  |  - check all fields not empty, check if user exists (front and back end checks), create new user <br>  - redirects to /travellog after user sign up | Body (username, password, homecountry)|
 |/auth/login|GET|- redirects to /travellog if user logged in <br> - renders the login form (with flash msg)||
 |/auth/login|POST|  - check all fields not empty, check if user exists (front and back end checks), check password bcrypt <br> - redirects to /travellog if user logged in|Body (username, password)|
-|/auth/logout|POST|- remove a user from the session <br> - redirects to /||
+|/auth/logout|GET|- remove a user from the session <br> - redirects to /||
 |/travellog|GET|- renders travel stats, list of countries visited, plus create country button||
 |/travellog/add|GET|- renders travel form with country field||
 |/travellog |POST|- check in countries model if country exists (if not redirect to /travellog/add with flash message), add the id of country to the travelLog array of user |Body (country)|
