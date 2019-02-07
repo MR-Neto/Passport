@@ -11,7 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/starter-template', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/travelLog', { useNewUrlParser: true })
   .then(() => console.log('connected'))
   .catch(error => console.log('error', error));
 
