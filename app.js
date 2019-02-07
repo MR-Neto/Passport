@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const travelLogRouter = require('./routes/travelLog');
 
 mongoose.connect('mongodb://localhost:27017/travelLog', { useNewUrlParser: true })
   .then(() => console.log('connected'))
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/travellog', travelLogRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

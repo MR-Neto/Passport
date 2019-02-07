@@ -34,7 +34,7 @@ router.post('/login', (req, res, next) => {
       if (bcrypt.compareSync(password, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
-        res.redirect('/travelLog');
+        res.redirect('/travellog');
       } else {
         // res.render('partials/users', {
         //   user: undefined,
@@ -52,14 +52,14 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, homeCountry } = req.body;
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
-  if (username === '' || password === '') {
-    res.render('partials/signup', {
-      errorMessage: 'Indicate a username and a password to sign up'
-    });
+  if (username === '' || password === '' || homeCountry === '') {
+    // res.render('partials/signup', {
+    //   errorMessage: 'Indicate a username and a password to sign up'
+    // });
     return;
   }
   User.findOne({ username })
@@ -68,23 +68,22 @@ router.post('/signup', (req, res, next) => {
         User.create({
           username,
           password: hashPass,
+          homeCountry,
         })
           .then(() => {
-            res.redirect('/users');
+            req.session.currentUser = user;
+            res.redirect('/travellog');
           })
-          .catch(error => {
+          .catch((error) => {
             next(error);
-          })
-      }
-      else {
-        res.render('partials/signup', { errorMessage: "Incorrect Username or Password" });
+          });
+      } else {
+        // res.render('partials/signup', { errorMessage: "Incorrect Username or Password" });
       }
     })
-    .catch(error => {
-      next(error)
+    .catch((error) => {
+      next(error);
     });
-
-
 });
 
 
