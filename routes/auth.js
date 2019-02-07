@@ -1,14 +1,10 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+const User = require('../models/user');
+const protectedRoutes = require('../middlewares/protectedRoutes');
 
 const router = express.Router();
-
-const bcrypt = require('bcrypt');
-
 const bcryptSalt = 10;
-
-const User = require('../models/user');
-
-const protectedRoutes = require('../middlewares/protectedRoutes');
 
 /* GET users listing. */
 router.get('/', protectedRoutes, (req, res, next) => {

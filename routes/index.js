@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('partials/index', { title: 'Express' });
+  res.render('home');
 });
 
 module.exports = router;
