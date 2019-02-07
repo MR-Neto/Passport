@@ -70,8 +70,8 @@ router.post('/signup', (req, res, next) => {
           password: hashPass,
           homeCountry,
         })
-          .then(() => {
-            req.session.currentUser = user;
+          .then((userCreated) => {
+            req.session.currentUser = userCreated;
             res.redirect('/travellog');
           })
           .catch((error) => {
