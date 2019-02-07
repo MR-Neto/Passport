@@ -100,7 +100,9 @@ Countries model
 ``` 
 ## Process
 
-- Planing
+- Planing: writing this readme and designing the wireframes
+![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/wireframes.jpeg)
+
 - MVP will be created through pair programming.
 - Backlog will be made in collaborative mode spliting tasks.
 
