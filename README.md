@@ -86,24 +86,23 @@ User model
 ```
 username: String
 password: String
+homecountry: String
+travelLog: Array of Obj_id
 ```
 
-Event model
+Countries model
 
 ```
-owner: ObjectId<User>
 name: String
-description: String
-date: Date
-location: String
-attendees: [ObjectId<User>]
 ``` 
 
 ## Links
 
 ### Trello
 
-[Link to your trello board](https://trello.com/b/WFXytC9n/travellog) 
+https://trello.com/invite/b/WFXytC9n/be8238e0c493c23977e4fa6c0fe4fa33/travellog
+
+Picture of your physical board
 
 ### Git
 
