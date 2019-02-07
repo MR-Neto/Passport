@@ -1,6 +1,6 @@
 <h1>Welcome user</h1>
 
-<form action="/users/login" method="POST" id="form">
+<form action="/auth/login" method="POST">
   <h3>Login</h3>
 
   <label for="username">Username</label>
@@ -9,13 +9,9 @@
   <label for="password">Password</label>
   <input type="password" name="password" placeholder="password">
 
-  <% if (errorMessage) { %>
-    <div class="error-message"><%= errorMessage %></div>
-  <% } %>
-
   <button>Sign in</button>
 
-  <p class="account-message">
-    Don't have an account? <a href="/users/signup">Sign up</a>
+  <p>
+    Don't have an account? <a href="/auth/signup">Sign up</a>
   </p>
 </form>

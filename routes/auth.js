@@ -6,18 +6,11 @@ const protectedRoutes = require('../middlewares/protectedRoutes');
 const router = express.Router();
 const bcryptSalt = 10;
 
-/* GET users listing. */
-router.get('/', protectedRoutes, (req, res, next) => {
-
-  res.render('partials/users', { errorMessage: undefined });
-
+router.get('/login', (req, res, next) => {
+  res.render('login');
 });
 
-router.get('/profile', (req, res, next) => {
 
-  res.render('partials/profile', { user: req.session.currentUser });
-
-});
 
 router.get('/signup', (req, res, next) => {
   res.render('partials/signup', { errorMessage: undefined });
