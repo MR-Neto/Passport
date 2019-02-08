@@ -1,4 +1,9 @@
-<%- include partials/headerLoggedOut.ejs%>
+<% if(locals.currentUser) { %>
+<%- include partials/headerLoggedIn.ejs %>
+<% } else { %>
+<%- include partials/headerLoggedOut.ejs %>
+<% } %>
+
 <main>
   <section>
   <div>image
