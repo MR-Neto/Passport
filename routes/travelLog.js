@@ -1,16 +1,20 @@
 const express = require('express');
 const Country = require('../models/country');
 const User = require('../models/user');
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
 
 const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('travellog');
+  const { _id } = req.session.currentUser;
+
+  User.findById(_id).populate('travelLog')
+    .then((data) => {
+      res.render('travellog', { travelLog: data.travelLog });
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 router.get('/add', (req, res, next) => {
@@ -19,21 +23,33 @@ router.get('/add', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { country } = req.body;
-  const { _id } = req.session.currentUser;
+  const userId = req.session.currentUser._id;
 
   Country.findOne({ name: country })
     .then((foundCountry) => {
       if (foundCountry) {
-        // console.log("Found ID ", foundCountry.id);
-        // User.findByIdAndUpdate(_id, { $push: { travelLog: "1" } });
-        // console.log("");
+        return User.findByIdAndUpdate(userId, { $push: { travelLog: foundCountry._id } });
       }
     })
-    .catch((error)=>{
+    .then(() => {
+      res.redirect('/travellog');      
+    })
+    .catch((error) => {
       next(error);
     });
+});
 
-  res.render('add');
+router.post('/:id/delete', (req, res, next) => {
+  const countryId = req.params.id;
+  const userId = req.session.currentUser._id;
+
+  User.findByIdAndUpdate(userId, { $pull: { travelLog: countryId } })
+    .then((data) => {
+      res.redirect('/travellog');
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 module.exports = router;
