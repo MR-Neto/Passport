@@ -24,9 +24,9 @@ router.post('/', (req, res, next) => {
   Country.findOne({ name: country })
     .then((foundCountry) => {
       if (foundCountry) {
-      //   console.log("Found ID ", foundCountry.id);
-      //   User.findByIdAndUpdate(_id, { $push: { travelLog: "1" } });
-      //   console.log("");
+        // console.log("Found ID ", foundCountry.id);
+        // User.findByIdAndUpdate(_id, { $push: { travelLog: "1" } });
+        // console.log("");
       }
     })
     .catch((error)=>{
