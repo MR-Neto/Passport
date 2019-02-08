@@ -24,12 +24,11 @@ router.post('/', (req, res, next) => {
   Country.findOne({ name: country })
     .then((foundCountry) => {
       if (foundCountry) {
-      //   console.log("Found ID ", foundCountry.id);
-      //   User.findByIdAndUpdate(_id, { $push: { travelLog: "1" } });
-      //   console.log("");
+        return User.findByIdAndUpdate(_id, { $push: { travelLog: foundCountry._id } });
       }
+      return null;
     })
-    .catch((error)=>{
+    .catch((error) => {
       next(error);
     });
 

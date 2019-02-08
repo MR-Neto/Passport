@@ -9,6 +9,8 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   homeCountry: { type: String, required: true },
   travelLog: [{ type: ObjectId, ref: 'Country' }],
+  //travelLog: [{ type: String }],
+  
 }, {
   timestamps: true,
 });
