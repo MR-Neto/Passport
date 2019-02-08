@@ -1,7 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const protectedRoutes = require('../middlewares/protectedRoutes');
 
 const router = express.Router();
 const bcryptSalt = 10;
@@ -11,7 +10,6 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log("POST LOGIN");
   const { username, password } = req.body;
 
   if (username === '' || password === '') {
