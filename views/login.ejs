@@ -3,13 +3,13 @@
   <h3>Login</h3>
 
   <label for="username">Username</label>
-  <input type="text" name="username" placeholder="username" required>
+  <input type="text" name="username" placeholder="username" required >
 
   <label for="password">Password</label>
-  <input type="password" name="password" placeholder="password" required>
+  <input type="password" name="password" placeholder="password" required >
 
   <button type="submit">Log In</button>
-
+  <%- include('./partials/notifications.ejs') %>
   <p>
     Don't have an account? <a href="/auth/signup">Sign up</a>
   </p>

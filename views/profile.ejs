@@ -1,14 +1,14 @@
 <%- include partials/headerLoggedIn.ejs %>
-<h1>Welcome <%= locals.currentUser.username %></h1>
+<h1>Welcome <%= currentUser.username %></h1>
 
 <h2>Profile</h2>
 <form class="form" action="/profile" method="POST">
 
   <label for="username">Username</label>
-  <input type="text" name="username" placeholder=<%= locals.currentUser.username %> required>
+  <input type="text" name="username" placeholder=<%= currentUser.username %> required>
 
   <label for="homeCountry">Home country</label>
-  <input type="text" name="homeCountry" placeholder=<%= locals.currentUser.homeCountry %> required>
+  <input type="text" name="homeCountry" placeholder=<%= currentUser.homeCountry %> required>
 
   <button type="submit">Save</button>
 </form>

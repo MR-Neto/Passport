@@ -14,10 +14,8 @@ router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
 
   if (username === '' || password === '') {
-    // res.render('partials/users', {
-    //   user: undefined,
-    //   errorMessage: 'Indicate a username and a password to sign up'
-    // });
+    req.flash('info', 'Please fill all fields');
+    res.redirect('/auth/login');
     return;
   }
 
