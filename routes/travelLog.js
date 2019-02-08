@@ -1,10 +1,6 @@
 const express = require('express');
 const Country = require('../models/country');
 const User = require('../models/user');
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
 
 const router = express.Router();
 
