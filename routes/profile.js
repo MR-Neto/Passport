@@ -29,7 +29,8 @@ router.post('/', (req, res, next) => {
             next(err);
           });
       } else {
-        // res.render('partials/signup', { errorMessage: "Incorrect Username or Password" });
+        req.flash('error', 'Incorrect values');
+        res.redirect('/profile');
       }
     })
     .catch((error) => {

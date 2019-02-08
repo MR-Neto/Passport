@@ -16,27 +16,20 @@ router.post('/login', (req, res, next) => {
   if (username === '' || password === '') {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/login');
-    return;
   }
-
   User.findOne({ username })
     .then((user) => {
       if (!user) {
-        // res.render('partials/users', {
-        //   user: undefined,
-        //   errorMessage: "The username doesn't exist"
-        // });
-        return;
+        req.flash('error', 'Incorrect user or password');
+        res.redirect('/auth/login');
       }
       if (bcrypt.compareSync(password, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
         res.redirect('/travellog');
       } else {
-        // res.render('partials/users', {
-        //   user: undefined,
-        //   errorMessage: 'Incorrect user or password'
-        // });
+        req.flash('error', 'Incorrect user or password');
+        res.redirect('/auth/login');
       }
     })
     .catch((error) => {
@@ -54,10 +47,8 @@ router.post('/signup', (req, res, next) => {
   const hashPass = bcrypt.hashSync(password, salt);
 
   if (username === '' || password === '' || homeCountry === '') {
-    // res.render('partials/signup', {
-    //   errorMessage: 'Indicate a username and a password to sign up'
-    // });
-    return;
+    req.flash('info', 'Please fill all fields');
+    res.redirect('/auth/signup');
   }
   User.findOne({ username })
     .then((user) => {
@@ -75,7 +66,8 @@ router.post('/signup', (req, res, next) => {
             next(error);
           });
       } else {
-        // res.render('partials/signup', { errorMessage: "Incorrect Username or Password" });
+        req.flash('error', 'Incorrect values');
+        res.redirect('/auth/signup');
       }
     })
     .catch((error) => {

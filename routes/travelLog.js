@@ -30,9 +30,11 @@ router.post('/', (req, res, next) => {
       if (foundCountry) {
         return User.findByIdAndUpdate(userId, { $push: { travelLog: foundCountry._id } });
       }
+      req.flash('error', 'Incorrect country input');
+      res.redirect('/travellog/add');
     })
     .then(() => {
-      res.redirect('/travellog');      
+      res.redirect('/travellog');
     })
     .catch((error) => {
       next(error);
