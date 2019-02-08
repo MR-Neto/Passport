@@ -23,16 +23,29 @@ router.get('/add', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { country } = req.body;
-  const { _id } = req.session.currentUser;
+  const userId = req.session.currentUser._id;
 
   Country.findOne({ name: country })
     .then((foundCountry) => {
       if (foundCountry) {
-        return User.findByIdAndUpdate(_id, { $push: { travelLog: foundCountry._id } });
+        return User.findByIdAndUpdate(userId, { $push: { travelLog: foundCountry._id } });
       }
     })
     .then(() => {
       res.redirect('/travellog');      
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id/delete', (req, res, next) => {
+  const countryId = req.params.id;
+  const userId = req.session.currentUser._id;
+
+  User.findByIdAndUpdate(userId, { $pull: { travelLog: countryId } })
+    .then((data) => {
+      res.redirect('/travellog');
     })
     .catch((error) => {
       next(error);
