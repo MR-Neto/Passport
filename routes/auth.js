@@ -1,11 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const loggedInRoute = require('../middlewares/loggedIn');
 
 const router = express.Router();
 const bcryptSalt = 10;
 
-router.get('/login', (req, res, next) => {
+router.get('/login', loggedInRoute, (req, res, next) => {
   res.render('login');
 });
 
@@ -45,7 +46,7 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', loggedInRoute, (req, res, next) => {
   res.render('signup');
 });
 
