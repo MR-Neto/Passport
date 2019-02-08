@@ -6,7 +6,15 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('travellog');
+  const { _id } = req.session.currentUser;
+
+  User.findById(_id).populate('travelLog')
+    .then((data) => {
+      res.render('travellog', { travelLog: data.travelLog });
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 router.get('/add', (req, res, next) => {
@@ -22,13 +30,13 @@ router.post('/', (req, res, next) => {
       if (foundCountry) {
         return User.findByIdAndUpdate(_id, { $push: { travelLog: foundCountry._id } });
       }
-      return null;
+    })
+    .then(() => {
+      res.redirect('/travellog');      
     })
     .catch((error) => {
       next(error);
     });
-
-  res.render('add');
 });
 
 module.exports = router;

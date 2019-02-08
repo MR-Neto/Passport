@@ -6,10 +6,9 @@
 </div>
 <div>
   <ul>
-    <li>Portugal</li>
-    <li>Portugal</li>
-    <li>Portugal</li>
-    <li>Portugal</li>
+    <% travelLog.forEach((country)=>{ %>
+      <li><%= country.name %></li>
+    <% }) %>
   </ul>
   <a href="/travellog/add">Add</a>
 </div>
