@@ -1,4 +1,5 @@
-<%- include partials/headerLoggedOut.ejs %>
+<%- include partials/header.ejs %>
+
 <form action="/auth/login" method="POST">
   <h3>Login</h3>
 
@@ -7,10 +8,7 @@
     <p class="control has-icons-left has-icons-right">
       <input class="input" type="text" name="username" placeholder="Username">
       <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
+        <i class="fas fa-user"></i>
       </span>
     </p>
   </div>
