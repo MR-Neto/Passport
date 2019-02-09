@@ -1,31 +1,74 @@
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+
+/* ---- typography ---- */
+
+body {
+  color: #111;
+  font-family: 'Lato', sans-serif;  font-size: 16px;
+  line-height: 147%;
+}
+
+h1 {
+  font-family: 'Zilla Slab', serif;
+  color: #006989;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 2.2rem;
+}
+
+h2 {}
+
+h3 {}
+
+p {
+  margin: 0;
+}
+
+.navbar-brand p {
+  font-family: 'Zilla Slab', serif;
+  color: #F7F5FB;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+
+
+/* ---- layout ---- */
+
+#home-banner {
+  background: url(../img/passport-banner.jpg) no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 20rem;
+  margin-top: 3.25rem;
+}
+
+/* ---- components ---- */
 
 a {
-  color: #00B7FF;
+  color: #006989;
   text-decoration: none;
-  border: 1px solid black;
 }
 
-nav{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
+.button {
+  background-color: #F58A07;
+  color: #F7F5FB;
+  border: none;
 }
 
-nav ul{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style: none;
-}
 
-ul{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}

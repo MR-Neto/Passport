@@ -1,15 +1,40 @@
 <header>
-<nav>
-  <a href="/">Logo img</a>
-  <ul>
-    <% if(currentUser) { %>
-    <li><a href="/travellog">Travel Log</a></li>
-    <li><a href="/profile">Profile</a></li>
-    <li><a href="/auth/logout">Log Out</a></li>
-    <% } else { %>
-    <li><a href="/auth/login">Log In</a></li>
-    <li><a href="/auth/signup">Sign Up</a></li>
-    <% } %>
-  </ul>
-</nav>
+  <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <p>Passport</p>
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-items">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbar-items" class="navbar-menu">
+      <% if(currentUser) { %>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-light">Travel Log</a>
+          </div>
+          <div class="buttons">
+            <span class="icon is-small">
+              <a href="/profile"><i class="fas fa-user"></i></a>
+            </span> 
+          </div>
+          <div class="buttons">
+            <a class="button is-light" href="/auth/logout">Log Out</a>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+      <div class="navbar-end">
+        <a class="navbar-item" href="/auth/login">Log In</a>
+        <a class="navbar-item" href="/auth/signup">Sign Up</a>
+      </div>
+      <% } %>
+    </div>
+  </nav>
 </header>
