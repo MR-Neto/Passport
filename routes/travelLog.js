@@ -21,6 +21,7 @@ router.get('/add', (req, res, next) => {
   res.render('add');
 });
 
+
 router.post('/', (req, res, next) => {
   const { country } = req.body;
   const userId = req.session.currentUser._id;
@@ -46,8 +47,20 @@ router.post('/:id/delete', (req, res, next) => {
   const userId = req.session.currentUser._id;
 
   User.findByIdAndUpdate(userId, { $pull: { travelLog: countryId } })
-    .then((data) => {
+    .then(() => {
       res.redirect('/travellog');
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.get('/map', (req, res, next) => {
+  const { _id } = req.session.currentUser;
+
+  User.findById(_id).populate('travelLog')
+    .then((data) => {
+      res.render('map', { travelLog: data.travelLog });
     })
     .catch((error) => {
       next(error);
