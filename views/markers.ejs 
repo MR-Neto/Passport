@@ -1,0 +1,8 @@
+<% travelLog.forEach((country)=>{ %>
+    
+    <% var marker = new google.maps.Marker({ %>
+      <% position: {lat:country.location.coordinates[1] , lng:country.location.coordinates[0]}, %>
+      <% map: map, %>
+      <% title: country.name %>
+    <% });%>
+  <% }) %>

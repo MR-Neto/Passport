@@ -1,0 +1,26 @@
+<%- include partials/headerLoggedIn.ejs %>
+
+<div class="map-container">
+  <div id="map">
+
+  </div>
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGnUItAOnvP91Q7_-aMR2jKmCryMOjIzM"></script>
+<script>
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 51.509865, lng: -0.118092},
+    zoom: 5
+  });
+
+  var travelLog =<%-JSON.stringify(travelLog)%>
+
+  travelLog.forEach((country)=>{
+    var marker = new google.maps.Marker({
+      position: {lat:country.location.coordinates[1] , lng:country.location.coordinates[0]},
+      map: map,
+      title: country.name
+    });
+  });
+</script>
