@@ -23,7 +23,13 @@
     <div class="field">
       <label class="label" for="homeCountry">Home country</label>
       <p class="control has-icons-left">
-        <input class="input" type="text" name="homeCountry" placeholder="Country">
+        <span class="select is-fullwidth">
+          <select>
+            <% countries.forEach((country) => { %>
+            <option><%= country.name %></option>
+            <% })%>
+          </select>
+        </span>
         <span class="icon is-small is-left">
           <i class="fas fa-globe-americas"></i>
         </span>

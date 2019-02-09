@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Country = require('../models/country');
 const loggedInRoute = require('../middlewares/loggedIn');
 
 const router = express.Router();
@@ -38,7 +39,13 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/signup', loggedInRoute, (req, res, next) => {
-  res.render('signup');
+  Country.find({})
+    .then((countries) => {
+      res.render('signup', { countries });
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 router.post('/signup', (req, res, next) => {
