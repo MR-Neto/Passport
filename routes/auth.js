@@ -8,7 +8,7 @@ const router = express.Router();
 const bcryptSalt = 10;
 
 router.get('/login', loggedInRoute, (req, res, next) => {
-  res.render('login');
+  res.render('auth/login');
 });
 
 router.post('/login', (req, res, next) => {
@@ -41,7 +41,7 @@ router.post('/login', (req, res, next) => {
 router.get('/signup', loggedInRoute, (req, res, next) => {
   Country.find({})
     .then((countries) => {
-      res.render('signup', { countries });
+      res.render('auth/signup', { countries });
     })
     .catch((error) => {
       next(error);

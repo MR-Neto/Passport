@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
-app.set('layout', 'layout');
+app.set('layout', 'layouts/layout');
 app.set('layout extractScripts', true);
 
 app.use(logger('dev'));
