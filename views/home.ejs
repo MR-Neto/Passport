@@ -18,8 +18,10 @@
     <div class="hero">
       <div id="home-banner" class="hero-body">
         <div class="container">
+          <% if(!currentUser) { %>
           <h1>Keep track of your trips with Passport.</h1>
           <a class="button" href="#">Sign Up</a>
+          <% } %>
         </div>
       </div>
     </div>
