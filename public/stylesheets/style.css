@@ -95,6 +95,10 @@ p {
   margin-top: 1rem;
 }
 
+#signup .button {
+  margin-top: 1rem;
+}
+
 #login p:last-child>a {
   color: #F7F5FB;
   text-decoration: underline;
