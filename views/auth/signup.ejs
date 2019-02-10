@@ -25,6 +25,7 @@
       <p class="control has-icons-left">
         <span class="select is-fullwidth">
           <select name="homeCountry">
+          <option value="" disabled selected>Select your country</option>
             <% countries.forEach((country) => { %>
             <option><%= country.name %></option>
             <% })%>
