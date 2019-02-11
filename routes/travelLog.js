@@ -3,17 +3,20 @@ const mongoose = require('mongoose');
 const Country = require('../models/country');
 const User = require('../models/user');
 const Trip = require('../models/trip');
+const Statistics = require('../helper/statistics');
 
 
 const router = express.Router();
 
-/* GET home page. */
 router.get('/', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
-  Trip.find({ users: _id })
-    .then((data) => {
-      //res.render('travellog', { travelLog: data.travelLog });
+  Trip.find({ users: _id }).populate('countries.country')
+    .then((trips) => {     
+      const numOfCountries = Statistics.calculateNumOfCountries(trips);
+      const areaCovered = Statistics.calculateArea(trips);
+
+      res.render('travellog', { trips, numOfCountries, areaCovered });
     })
     .catch((error) => {
       next(error);

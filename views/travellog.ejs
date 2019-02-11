@@ -10,7 +10,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Countries visited</p>
-              <p>6</p>
+              <p><%= numOfCountries %></p>
             </div>
           </div>
           <div class="level-item has-text-centered">
@@ -26,7 +26,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Area covered</p>
-              <p>5000km2</p>
+              <p><%= areaCovered %> km2</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
@@ -41,11 +41,11 @@
     <!-- Statitics summary end -->
   </div>
 
-  <div class="container log">
+  <!-- <div class="container log">
     <ul class="trip-list">
-      <% travelLog.forEach((country)=>{ %>
-      <li><%= country.name %> 
-        <form action="/travellog/<%= country.id %>/delete" method="POST">
+      <% trips.forEach((trip)=>{ %>
+      <li><%= trip.name %> 
+        <form action="/travellog/<%= trip.id %>/delete" method="POST">
           <button class="remove-trip-btn" type="submit">-</button>    
         </form> 
       </li>
@@ -53,5 +53,5 @@
     </ul>
     <a href="/travellog/add">Add</a>
     <a href="/travellog/map">Map</a>
-  </div>
+  </div>-->
 </div>
