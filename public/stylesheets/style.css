@@ -99,7 +99,7 @@ p {
 }
 
 .log {
-  margin-top: 50%;
+  margin-top: 20%;
 }
 
 /* ---- components ---- */
@@ -142,7 +142,7 @@ p {
 }
 
 #travel-log .log>a {
-  width: 4rem;
+  width: 5rem;
 }
 
 #travel-log .trip-list li {

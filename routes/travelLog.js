@@ -30,7 +30,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/add', (req, res, next) => {
-  res.render('add');
+  Country.find({})
+    .then((countries) => {
+      res.render('add', { countries });
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 
