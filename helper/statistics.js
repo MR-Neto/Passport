@@ -20,6 +20,20 @@ const Statistics = {
     });
     return uniqueArray;
   },
+
+  getLastVisiteCountryFlag: (trips) => {
+    const sortedDates = Statistics.flattenArray(trips).sort((a, b) => {
+      if (a.dates.endDate < b.dates.endDate) {
+        return -1;
+      }
+      if (a.dates.endDate > b.dates.endDate) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    return sortedDates.pop().country.flag;
+  },
 };
 
 

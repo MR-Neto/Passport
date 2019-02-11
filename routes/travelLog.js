@@ -15,8 +15,15 @@ router.get('/', (req, res, next) => {
     .then((trips) => {     
       const numOfCountries = Statistics.calculateNumOfCountries(trips);
       const areaCovered = Statistics.calculateArea(trips);
+      const lastVisitedCountryFlag = Statistics.getLastVisiteCountryFlag(trips);
+      console.log(lastVisitedCountryFlag);
 
-      res.render('travellog', { trips, numOfCountries, areaCovered });
+      res.render('travellog', {
+        trips,
+        numOfCountries,
+        areaCovered,
+        lastVisitedCountryFlag,
+      });
     })
     .catch((error) => {
       next(error);
