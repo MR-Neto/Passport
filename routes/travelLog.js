@@ -12,11 +12,10 @@ router.get('/', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
   Trip.find({ users: _id }).populate('countries.country')
-    .then((trips) => {     
+    .then((trips) => {
       const numOfCountries = Statistics.calculateNumOfCountries(trips);
       const areaCovered = Statistics.calculateArea(trips);
       const lastVisitedCountryFlag = Statistics.getLastVisiteCountryFlag(trips);
-      console.log(lastVisitedCountryFlag);
 
       res.render('travellog', {
         trips,

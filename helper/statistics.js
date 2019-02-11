@@ -1,13 +1,12 @@
 const Statistics = {
-  calculateNumOfCountries: (trips) => {
-    return Statistics.uniqueArray(Statistics.flattenArray(trips)).length;
-  },
-  calculateArea: (trips) => {    
-    return Statistics.uniqueArray(Statistics.flattenArray(trips)).reduce((acc, country) => acc + country.area, 0);
-  },
-  flattenArray: (array) => {
-    return array.reduce((acc, currentValue) => acc.concat(currentValue.countries), []);
-  },
+  calculateNumOfCountries: trips => Statistics.uniqueArray(Statistics.flattenArray(trips)).length,
+
+  calculateArea: trips => Statistics.uniqueArray(Statistics.flattenArray(trips))
+    .reduce((acc, country) => acc + country.area, 0),
+
+  flattenArray: array => array
+    .reduce((acc, currentValue) => acc.concat(currentValue.countries), []),
+
   uniqueArray: (array) => {
     const stringArray = [];
     const uniqueArray = [];
@@ -35,6 +34,5 @@ const Statistics = {
     return sortedDates.pop().country.flag;
   },
 };
-
 
 module.exports = Statistics;
