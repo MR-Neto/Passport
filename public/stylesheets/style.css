@@ -1,40 +1,124 @@
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
-  text-decoration: none;
-  border: 1px solid black;
+
+/* ---- typography ---- */
+
+body {
+  color: #111;
+  font-family: 'Lato', sans-serif;  font-size: 16px;
+  line-height: 147%;
 }
 
-nav{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+#home-banner h1 {
+  font-family: 'Lato', sans-serif;  font-size: 16px;
+  color: #006989;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 2.2rem;
+  text-align: right;
+}
+
+#login h1 {
+  font-family: 'Zilla Slab', serif;
+  color: #F7F5FB;
+  font-weight: 700;
+  font-size: 3.5rem;
+  line-height: 2.2rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+#login p, #login label {
+  font-family: 'Lato', sans-serif;  font-size: 16px;
+  color: #F7F5FB;
+  font-weight: 400;
+  
+}
+
+h2 {}
+
+h3 {}
+
+p {
+  margin: 0;
+}
+
+.navbar-brand p {
+  font-family: 'Zilla Slab', serif;
+  color: #F7F5FB;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+
+
+/* ---- layout ---- */
+
+#home-banner {
+  background: url(../img/passport-banner.jpg) no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 20rem;
+  margin-top: 3.25rem;
+}
+
+#login {
+  background-color: #363636;
+  height: 100vh;
+  padding: 3rem 2rem;
 
 }
 
-nav ul{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style: none;
+.form {
+  margin-top: 3.25rem;
+  padding: 3rem 2rem;
 }
 
-ul{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* ---- components ---- */
+
+#home-banner .button {
+  font-weight: 700;
+  margin-top: 1rem;
 }
 
-#map {
-  height: 100%;
+#signup .button {
+  margin-top: 1rem;
 }
 
-.map-container{
-  height: 90vh;
-  width: 90vw;
-
+#login p:last-child>a {
+  color: #F7F5FB;
+  text-decoration: underline;
 }
+
+.button {
+  background-color: #F58A07;
+  color: #F7F5FB;
+  border: none;
+}
+
+#login .button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.btn-instagram {
+  background-color: #517fa4;
+  color: #F7F5FB;
+  width: 100%;
+}
+
+

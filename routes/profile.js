@@ -1,11 +1,18 @@
 const express = require('express');
 const User = require('../models/user');
+const Country = require('../models/country');
 
 const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('profile');
+  Country.find({})
+    .then((countries) => {
+      res.render('profile', { countries });
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.post('/', (req, res, next) => {
