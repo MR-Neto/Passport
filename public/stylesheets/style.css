@@ -62,8 +62,6 @@ p {
   font-size: 1.6rem;
 }
 
-
-
 /* ---- layout ---- */
 
 #home-banner {
@@ -90,6 +88,18 @@ p {
 
 #travel-log {
   margin-top: 3.25rem;
+}
+
+#travel-log .columns {
+  width: 100%;
+}
+
+#travel-log h2 {
+  padding: 1rem 2rem;
+}
+
+.log {
+  margin-top: 50%;
 }
 
 /* ---- components ---- */
@@ -125,19 +135,14 @@ p {
   width: 100%;
 }
 
-#travel-log .stats {
-  position: fixed;
-  /* height: 50vh; */
-}
-
-.log {
-  /* margin-top: 50vh; */
-}
-
-#travel-log .trip-list {
+#travel-log .log {
   display: flex;
   flex-direction: column;
   padding: 2rem;
+}
+
+#travel-log .log>a {
+  width: 4rem;
 }
 
 #travel-log .trip-list li {
