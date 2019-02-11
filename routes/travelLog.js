@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const Country = require('../models/country');
 const User = require('../models/user');
 const Trip = require('../models/trip');
@@ -10,9 +11,9 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
-  User.findById(_id).populate('travelLog')
+  Trip.find({ users: _id })
     .then((data) => {
-      res.render('travellog', { travelLog: data.travelLog });
+      //res.render('travellog', { travelLog: data.travelLog });
     })
     .catch((error) => {
       next(error);
@@ -25,26 +26,20 @@ router.get('/add', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  const { user, country, startDate, endDate } = req.body;
+  const { country, startDate, endDate } = req.body;
 
   const userId = req.session.currentUser._id;
-
-  Trip.create({
-    name: 'TRIP',
-    dates: { startDate, endDate },
-  })
-    .then((userCreated) => {
-      req.session.currentUser = userCreated;
-      res.redirect('/travellog');
-    })
-    .catch((error) => {
-      next(error);
-    });
 
   Country.findOne({ name: country })
     .then((foundCountry) => {
       if (foundCountry) {
-        return User.findByIdAndUpdate(userId, { $push: { travelLog: foundCountry._id } });
+        const countryId = mongoose.Types.ObjectId(foundCountry._id);
+
+        return Trip.create({
+          name: country,
+          users: [userId],
+          countries: [{ country: countryId, dates: { startDate, endDate } }],
+        });
       }
       req.flash('error', 'Incorrect country input');
       res.redirect('/travellog/add');
@@ -58,10 +53,9 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/:id/delete', (req, res, next) => {
-  const countryId = req.params.id;
-  const userId = req.session.currentUser._id;
+  const tripId = req.params.id;
 
-  User.findByIdAndUpdate(userId, { $pull: { travelLog: countryId } })
+  Trip.findByIdAndDelete(tripId)
     .then(() => {
       res.redirect('/travellog');
     })
