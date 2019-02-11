@@ -1,6 +1,8 @@
 const express = require('express');
 const Country = require('../models/country');
 const User = require('../models/user');
+const Trip = require('../models/trip');
+
 
 const router = express.Router();
 
@@ -23,8 +25,21 @@ router.get('/add', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  const { country } = req.body;
+  const { user, country, startDate, endDate } = req.body;
+
   const userId = req.session.currentUser._id;
+
+  Trip.create({
+    name: 'TRIP',
+    dates: { startDate, endDate },
+  })
+    .then((userCreated) => {
+      req.session.currentUser = userCreated;
+      res.redirect('/travellog');
+    })
+    .catch((error) => {
+      next(error);
+    });
 
   Country.findOne({ name: country })
     .then((foundCountry) => {

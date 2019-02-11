@@ -1,11 +1,20 @@
 <%- include partials/header.ejs %>
 
-<h1>Add Country</h1>
+<h1>Add Trip</h1>
 <form class="form" action="/travellog" method="POST">
+
+  <label for="user">User</label>
+  <input type="text" name="user" value="<%= currentUser.username%>" required>
 
   <label for="country">Country</label>
   <input type="text" name="country" required>
 
-  <button type="submit">Save</button>
+  <label for="startDate">Start Date</label>
+  <input type="date" name="startDate">
+
+  <label for="endDate">End Date</label>
+  <input type="date" name="endDate">
+
+  <button type="submit">Add Trip</button>
   <%- include('./partials/notifications.ejs') %>
 </form>

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -16,7 +17,7 @@ const profileRouter = require('./routes/profile');
 const protectedRoute = require('./middlewares/protected');
 const notifications = require('./middlewares/notifications');
 
-mongoose.connect('mongodb://localhost:27017/travelLog', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => console.log('connected'))
   .catch(error => console.log('error', error));
 
