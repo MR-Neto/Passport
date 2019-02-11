@@ -32,7 +32,11 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Last trip</p>
+              <% if (lastVisitedCountryFlag === undefined) { %>
+              <p><i class="fab fa-font-awesome-flag"></i></p>
+              <% } else { %>
               <p><img src="<%= lastVisitedCountryFlag %>" alt="country-flag" width="50px" height="50px"></p>
+              <% } %>
             </div>
           </div>
         </nav>
@@ -41,7 +45,7 @@
     <!-- Statitics summary end -->
   </div>
 
-  <!-- <div class="container log">
+  <div class="container log">
     <ul class="trip-list">
       <% trips.forEach((trip)=>{ %>
       <li><%= trip.name %> 
@@ -53,5 +57,5 @@
     </ul>
     <a href="/travellog/add">Add</a>
     <a href="/travellog/map">Map</a>
-  </div>-->
+  </div>
 </div>

@@ -31,7 +31,11 @@ const Statistics = {
       // a must be equal to b
       return 0;
     });
-    return sortedDates.pop().country.flag;
+    // Check the case where trips is empty
+    if (sortedDates.length > 0) {
+      return sortedDates.pop().country.flag;
+    }
+    return undefined;
   },
 };
 
