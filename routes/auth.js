@@ -30,7 +30,7 @@ router.get('/login/instagram', async (req, res, next) => {
         code,
       }),
     );
-    res.send(data);
+    console.log(data);
     // const { username, profile_picture } = data.user;
     // const user = await User.findOne({ username });
     // if (!user) {
