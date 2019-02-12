@@ -38,7 +38,7 @@ router.get('/login/instagram', async (req, res, next) => {
       const userCreated = await User.create({
         username,
         password: hashPass,
-        imageUrl: profile_picture,
+        profilePicture: profile_picture,
         isCreatedFromInstagram: true,
       });
       req.session.currentUser = userCreated;
