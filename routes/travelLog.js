@@ -16,13 +16,17 @@ router.get('/', (req, res, next) => {
     .then((trips) => {
       const numOfCountries = Statistics.calculateNumOfCountries(trips);
       const areaCovered = Statistics.calculateArea(trips);
+      const totalWorldArea = Statistics.worldArea;
+      const percentageArea = Math.round(areaCovered / totalWorldArea*100*100)/100;
       const lastVisitedCountryFlag = Statistics.getLastVisiteCountryFlag(trips);
+      const numOfContinents = Statistics.calculateContinents(trips);
 
       res.render('travellog', {
         trips,
         numOfCountries,
-        areaCovered,
+        percentageArea,
         lastVisitedCountryFlag,
+        numOfContinents,
       });
     })
     .catch((error) => {
