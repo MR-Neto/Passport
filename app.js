@@ -7,11 +7,17 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+require("dotenv").config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const travelLogRouter = require('./routes/travelLog');
+const profileRouter = require('./routes/profile');
+const protectedRoute = require('./middlewares/protected');
+const notifications = require('./middlewares/notifications');
 
-mongoose.connect('mongodb://localhost:27017/travelLog', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => console.log('connected'))
   .catch(error => console.log('error', error));
 
@@ -22,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
-app.set('layout', 'layout');
+app.set('layout', 'layouts/layout');
 app.set('layout extractScripts', true);
 
 app.use(logger('dev'));
@@ -36,13 +42,16 @@ app.use(session({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60, // 1 day
   }),
-  secret: 'some-string',
+  secret: process.env.SECRET,
   resave: true,
   saveUninitialized: true,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
   },
 }));
+
+app.use(flash());
+app.use(notifications);
 
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
@@ -51,7 +60,9 @@ app.use((req, res, next) => {
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/travellog', protectedRoute, travelLogRouter);
+app.use('/profile', protectedRoute, profileRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

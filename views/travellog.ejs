@@ -1,0 +1,60 @@
+<%- include partials/header.ejs %>
+
+<div id="travel-log" class="container">
+  <div class="container stats">
+    <h2 class="title is-2">Your travel log, <%= currentUser.username %></h2>
+    <!-- Statitics summary start -->
+    <div class="columns">
+      <div class="column">
+        <nav class="level is-mobile">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Countries visited</p>
+              <p><%= numOfCountries %></p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Continents</p>
+              <p>2</p>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="column">
+        <nav class="level is-mobile">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Area covered</p>
+              <p><%= areaCovered %> km2</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Last trip</p>
+              <% if (lastVisitedCountryFlag === undefined) { %>
+              <p><i class="fab fa-font-awesome-flag"></i></p>
+              <% } else { %>
+              <p><img src="<%= lastVisitedCountryFlag %>" alt="country-flag" width="50px" height="50px"></p>
+              <% } %>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- Statitics summary end -->
+  </div>
+
+  <div class="container log">
+    <ul class="trip-list">
+      <% trips.forEach((trip)=>{ %>
+      <li><%= trip.name %> 
+        <form action="/travellog/<%= trip.id %>/delete" method="POST">
+          <button class="remove-trip-btn" type="submit">-</button>    
+        </form> 
+      </li>
+      <% }) %>
+    </ul>
+    <a class="button" href="/travellog/add">Add trip</a>
+  </div>
+</div>

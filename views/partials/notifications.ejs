@@ -1,0 +1,11 @@
+<% infoMessages && infoMessages.forEach((message) => { %>
+<div class="alert alert-info">
+<%- message %>
+</div>
+<% })
+errorMessages && errorMessages.forEach((message) => { %>
+<div class="alert alert-danger">
+<%- message %>
+</div>
+<% }) %>
+

@@ -1,0 +1,46 @@
+<%- include partials/header.ejs %>
+
+<!-- This modal only triggers on Sign Up button click -->
+  <div class="modal">
+    <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="container form">
+          <%- include partials/signup-form.ejs %>
+        </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+    </div>
+  </div>
+  <!-- End of modal -->
+
+  <section class=".section">
+    <div class="hero">
+      <div id="home-banner" class="hero-body">
+        <div class="container">
+          <% if(!currentUser) { %>
+          <h1>Keep track of your trips with Passport.</h1>
+          <a class="button" href="#">Sign Up</a>
+          <% } else { %>
+          <h1>Welcome back <%= currentUser.username %></h1>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class=".section">
+    <div class="container">
+      <h2>Feature 1</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+    <div class="container">
+      <h2>Feature 1</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+    <div class="container">
+      <h2>Feature 1</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+  </section>
+
+<%- include partials/footer.ejs%>
