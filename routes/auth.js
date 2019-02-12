@@ -19,12 +19,16 @@ router.get('/login/instagram', (req, res, next) => {
   const { code } = req.query;
   console.log(code);
 
-  axios.post('https://api.instagram.com/oauth/access_token', {
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    grant_type: 'authorization_code',
-    redirect_uri: process.env.REDIRECT_URI,
-    code,
+  axios({
+    method: 'post',
+    url: 'https://api.instagram.com/oauth/access_token',
+    params: {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      grant_type: 'authorization_code',
+      redirect_uri: process.env.REDIRECT_URI,
+      code,
+    },
   })
     .then((response) => {
       console.log(response);
