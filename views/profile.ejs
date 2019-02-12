@@ -3,6 +3,9 @@
 <h1>Welcome <%= currentUser.username %></h1>
 
 <h2>Profile</h2>
+<figure class="image is-128x128">
+  <img src=<%= currentUser.profilePicture %>>
+</figure>
 <div class="container form">
   <form action="/auth/signup" method="POST">
     <div class="field">

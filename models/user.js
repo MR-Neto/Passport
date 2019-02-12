@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   homeCountry: { type: String },
   isCreatedFromInstagram: { type: Boolean, default: false },
-  profileUser: { type: String },
+  profilePicture: { type: String },
 }, {
   timestamps: true,
 });
