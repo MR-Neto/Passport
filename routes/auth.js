@@ -60,8 +60,8 @@ router.post('/login', (req, res, next) => {
     res.redirect('/auth/login');
   }
   User.findOne({ username })
-    .then(user => {
-      if (!user) {
+    .then((user) => {
+      if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
         res.redirect('/auth/login');
       }
@@ -74,7 +74,7 @@ router.post('/login', (req, res, next) => {
         res.redirect('/auth/login');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       next(error);
     });
 });
