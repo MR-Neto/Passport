@@ -1,4 +1,8 @@
+const Country = require('../models/country');
+
 const Statistics = {
+
+
   calculateNumOfCountries: trips => Statistics.uniqueArray(Statistics.flattenArray(trips)).length,
 
   calculateArea: trips => Statistics.uniqueArray(Statistics.flattenArray(trips))
@@ -23,7 +27,39 @@ const Statistics = {
     return undefined;
   },
 
-  calculateContinents: trips => Statistics.flattenArray(trips),
+  calculateContinents: (trips) => {
+    let africa = 0;
+    let americas = 0;
+    let europe = 0;
+    let asia = 0;
+    let oceania = 0;
+    let polar = 0;
+
+    Statistics.uniqueArray(Statistics.flattenArray(trips)).forEach((country) => {
+      if (country.region === 'Africa' && africa === 0) {
+        africa = 1;
+      }
+      if (country.region === 'Americas' && americas === 0) {
+        americas = 1;
+      }
+      if (country.region === 'Europe' && europe === 0) {
+        europe = 1;
+      }
+      if (country.region === 'Asia' && asia === 0) {
+        asia = 1;
+      }
+      if (country.region === 'Oceania' && oceania === 0) {
+        oceania = 1;
+      }
+      if (country.region === 'Polar' && polar === 0) {
+        polar = 1;
+      }
+    });
+
+    return africa + americas + europe + asia + oceania + polar;
+  },
+
+  calculateTotalWorldArea: countries => countries.reduce((acc, country) => acc + (Number(country.area) || 0), 0),
 
   flattenArray: array => array
     .reduce((acc, currentValue) => acc.concat(currentValue.countries), []),
@@ -40,8 +76,13 @@ const Statistics = {
     });
     return uniqueArray;
   },
-
-
+  worldArea: 0,
 };
+
+Country.find({})
+  .then((countries) => {
+    Statistics.worldArea = Statistics.calculateTotalWorldArea(countries);
+  });
+
 
 module.exports = Statistics;
