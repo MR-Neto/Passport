@@ -3,12 +3,20 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Country = require('../models/country');
 const loggedInRoute = require('../middlewares/loggedIn');
+require("dotenv").config();
 
 const router = express.Router();
 const bcryptSalt = 10;
 
 router.get('/login', loggedInRoute, (req, res, next) => {
-  res.render('auth/login');
+  const clientId = process.env.CLIENT_ID;
+  const redirectUri = process.env.REDIRECT_URI;
+  res.render('auth/login', { clientId, redirectUri });
+});
+
+router.get('/login/instagram', (req, res, next) => {
+  const { code } = req.query;
+  console.log(code);
 });
 
 router.post('/login', (req, res, next) => {
