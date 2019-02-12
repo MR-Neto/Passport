@@ -4,6 +4,7 @@ const Country = require('../models/country');
 const User = require('../models/user');
 const Trip = require('../models/trip');
 const Statistics = require('../helper/statistics');
+require("dotenv").config();
 
 
 const router = express.Router();
@@ -84,7 +85,7 @@ router.get('/map', (req, res, next) => {
 
   User.findById(_id).populate('travelLog')
     .then((data) => {
-      res.render('map', { travelLog: data.travelLog });
+      res.render('map', { travelLog: data.travelLog, GMAPAPIKEY: process.env.GMAPAPIKEY });
     })
     .catch((error) => {
       next(error);
