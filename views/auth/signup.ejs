@@ -1,2 +1,10 @@
 <%- include ../partials/header.ejs %>
 <%- include ../partials/signup-form.ejs%>
+<p class="container">
+    <a class="button is-large btn-instagram" href="https://api.instagram.com/oauth/authorize/?client_id=<%= clientId %>&redirect_uri=<%= redirectUri %>&response_type=code">
+      <span class="icon">
+        <i class="fab fa-instagram"></i>
+      </span>
+      <span>Sign Up with Instagram</span>
+    </a>
+  </p>
