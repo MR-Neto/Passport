@@ -31,11 +31,13 @@ router.get('/login/instagram', async (req, res, next) => {
       }),
     );
     const { username, profile_picture } = result.data.user;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(username, salt);
     const user = await User.findOne({ username });
     if (!user) {
       const userCreated = await User.create({
         username,
-        password: '',
+        password: hashPass,
         imageUrl: profile_picture,
         isCreatedFromInstagram: true,
       });
@@ -99,7 +101,7 @@ router.post('/signup', (req, res, next) => {
     res.redirect('/auth/signup');
   }
   User.findOne({ username })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         User.create({
           username,
