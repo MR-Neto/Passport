@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
 const loggedInRoute = require('../middlewares/loggedIn');
@@ -19,17 +20,14 @@ router.get('/login/instagram', (req, res, next) => {
   const { code } = req.query;
   console.log(code);
 
-  axios({
-    method: 'post',
-    url: 'https://api.instagram.com/oauth/access_token',
-    params: {
+  axios.post('https://api.instagram.com/oauth/access_token',
+    qs.stringify({
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
       grant_type: 'authorization_code',
       redirect_uri: process.env.REDIRECT_URI,
       code,
-    },
-  })
+    }))
     .then((response) => {
       console.log(response);
     })
