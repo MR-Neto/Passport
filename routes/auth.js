@@ -30,21 +30,22 @@ router.get('/login/instagram', async (req, res, next) => {
         code,
       }),
     );
-    const { username, profile_picture } = data.user;
-    const user = await User.findOne({ username });
-    if (!user) {
-      const userCreated = await User.create({
-        username,
-        password: '',
-        imageUrl: profile_picture,
-        isCreatedFromInstagram: true,
-      });
-      req.session.currentUser = userCreated;
-      res.redirect('/travellog');
-    } else {
-      req.session.currentUser = user;
-      res.redirect('/travellog');
-    }
+    res.send(data);
+    // const { username, profile_picture } = data.user;
+    // const user = await User.findOne({ username });
+    // if (!user) {
+    //   const userCreated = await User.create({
+    //     username,
+    //     password: '',
+    //     imageUrl: profile_picture,
+    //     isCreatedFromInstagram: true,
+    //   });
+    //   req.session.currentUser = userCreated;
+    //   res.redirect('/travellog');
+    // } else {
+    //   req.session.currentUser = user;
+    //   res.redirect('/travellog');
+    // }
   } catch (error) {
     next(error);
   }
