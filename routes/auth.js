@@ -16,11 +16,11 @@ router.get('/login', loggedInRoute, (req, res, next) => {
   res.render('auth/login', { clientId, redirectUri });
 });
 
-router.get('/login/instagram', (req, res, next) => {
+router.get('/login/instagram', async (req, res, next) => {
   const { code } = req.query;
 
-  axios
-    .post(
+  try {
+    const data = await axios.post(
       'https://api.instagram.com/oauth/access_token',
       qs.stringify({
         client_id: process.env.CLIENT_ID,
@@ -29,26 +29,25 @@ router.get('/login/instagram', (req, res, next) => {
         redirect_uri: process.env.REDIRECT_URI,
         code,
       }),
-    )
-    .then((data) => {
-      const { username, profile_picture } = data.user;
-      User.findOne({ username }).then((user) => {
-        if (!user) {
-          User.create({
-            username,
-            password: '',
-            imageUrl: profile_picture,
-            isCreatedFromInstagram: true,
-          }).then((userCreated) => {
-            req.session.currentUser = userCreated;
-            res.redirect('/travellog');
-          });
-        } else {
-          req.session.currentUser = user;
-          res.redirect('/travellog');
-        }
+    );
+    const { username, profile_picture } = data.user;
+    const user = await User.findOne({ username });
+    if (!user) {
+      const userCreated = await User.create({
+        username,
+        password: '',
+        imageUrl: profile_picture,
+        isCreatedFromInstagram: true,
       });
-    });
+      req.session.currentUser = userCreated;
+      res.redirect('/travellog');
+    } else {
+      req.session.currentUser = user;
+      res.redirect('/travellog');
+    }
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/login', (req, res, next) => {
