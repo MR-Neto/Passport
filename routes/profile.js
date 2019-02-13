@@ -30,6 +30,9 @@ router.post('/', (req, res, next) => {
       if (!user) {
         User.findByIdAndUpdate(_id, { username, homeCountry })
           .then(() => {
+            // Update User session with new properties
+            req.session.currentUser.username = username;
+            req.session.currentUser.homeCountry = homeCountry;
             res.redirect('/travellog');
           })
           .catch((err) => {
@@ -45,11 +48,12 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.post('/delete', (req, res, next) => {
+router.get('/delete', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
   User.findByIdAndDelete(_id)
     .then(() => {
+      req.session.destroy();
       res.redirect('/');
     })
     .catch((error) => {

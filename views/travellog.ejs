@@ -46,15 +46,29 @@
   </div>
 
   <div class="container log">
-    <ul class="trip-list">
-      <% trips.forEach((trip)=>{ %>
-      <li><%= trip.name %> 
+    <div class="trip-list">
+      <% trips.forEach((trip)=> { %>
+      <% if(trip.countries[0].country.region === 'Europe') { %>
+      <a href="/travellog/<%= trip.id %>" class="box europe">
+      <% } else if(trip.countries[0].country.region === 'Asia') { %>
+      <a href="/travellog/<%= trip.id %>" class="box asia">
+      <% } else if(trip.countries[0].country.region === 'Americas') { %>
+      <a href="/travellog/<%= trip.id %>" class="box americas">
+      <% } else if(trip.countries[0].country.region === 'Africa') { %>
+      <a href="/travellog/<%= trip.id %>" class="box africa">
+      <% } else if(trip.countries[0].country.region === 'Oceania') { %>
+      <a href="/travellog/<%= trip.id %>" class="box oceania">
+      <% } %>
+        <h3 class="title is-3"><%= trip.name %></h3>
         <form action="/travellog/<%= trip.id %>/delete" method="POST">
-          <button class="remove-trip-btn" type="submit">-</button>    
+          <button class="remove-trip-btn delete is-medium" type="submit">-</button>    
         </form> 
-      </li>
+      </a>
       <% }) %>
-    </ul>
+    </div>
     <a class="button" href="/travellog/add">Add trip</a>
   </div>
 </div>
+<script src="/js/setTripImage.js"></script>
+
+

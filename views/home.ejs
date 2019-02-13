@@ -1,5 +1,6 @@
 <%- include partials/header.ejs %>
 
+<div id="home">
 <!-- This modal only triggers on Sign Up button click -->
   <div class="modal">
     <div class="modal-background"></div>
@@ -7,40 +8,45 @@
         <div class="container form">
           <%- include partials/signup-form.ejs %>
         </div>
-      <button class="modal-close is-large" aria-label="close"></button>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
     </div>
   </div>
   <!-- End of modal -->
 
-  <section class=".section">
-    <div class="hero">
-      <div id="home-banner" class="hero-body">
-        <div class="container">
-          <% if(!currentUser) { %>
-          <h1>Keep track of your trips with Passport.</h1>
-          <a class="button" href="#">Sign Up</a>
-          <% } else { %>
-          <h1>Welcome back <%= currentUser.username %></h1>
-          <% } %>
-        </div>
+  <div class="hero">
+    <div id="home-banner" class="hero-body">
+      <div class="container">
+        <% if(!currentUser) { %>
+        <h1>Keep track of your trips with Passport.</h1>
+        <a class="button" href="#">Sign Up</a>
+        <% } else { %>
+        <h1>Welcome back <%= currentUser.username %></h1>
+        <% } %>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class=".section">
+  <section class="section">
     <div class="container">
-      <h2>Feature 1</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
-    </div>
-    <div class="container">
-      <h2>Feature 1</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
-    </div>
-    <div class="container">
-      <h2>Feature 1</h2>
+      <h4 class="title is-4">Keep your trips with Passport</h2>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
     </div>
   </section>
+  
+  <section class="section">
+    <div class="container">
+      <h4 class="title is-4">Have a world view of your achievements</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <h4 class="title is-4">Sign In with Instagram</h4>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+  </section>
+</div>
 
 <%- include partials/footer.ejs%>

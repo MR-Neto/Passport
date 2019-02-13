@@ -72,6 +72,18 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  Trip.findById(id).populate('countries.country')
+    .then((trip) => {
+      res.render('trip-details', { trip });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.post('/:id/delete', (req, res, next) => {
   const tripId = req.params.id;
 
