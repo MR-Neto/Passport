@@ -20,9 +20,9 @@ Keep track of all your trips with our app. It will crunch all the stats of your 
 
 - **travel log** - As a user I want to see all the countries I have visited and see travel stats. 
 
-- **add countries to travel log** - As a user I will be able to add countries to my travel log.
+- **add trips to travel log** - As a user I will be able to add countries to my travel log.
 
-- **delete countries to travel log** - As a user I will be able to remove countries directly from my list.
+- **delete trips to travel log** - As a user I will be able to remove countries directly from my list.
 
 - **see profile** - As a user I will be able to see profile.
 
@@ -42,12 +42,12 @@ Auth:
 TravelLog:
 - Pick new visited from list
 - Add more stats (groups of countries)
-- Add cities
 - Change interface to a passport
 
 API:
 - Countries Api connection
-- Map in Travellog with pins of visited places
+- Map in Travellog with pins showing visited places
+- Sign in with your Instagram account
 - Share to Instagram places I have been
 - Display images from instagram
 - Webcam of places visited
@@ -79,32 +79,67 @@ Error:
 
 
 
-
 ## Models
 
 User model
 ```
 {
-    username: String,
-    password: String,
-    homecountry: String,
-    travelLog: Array of Obj_id, ref: Countries
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  homeCountry: { type: String },
+  isCreatedFromInstagram: { type: Boolean, default: false },
+  profilePicture: { type: String },
 }
 ```
 
-Countries model
+Country model
 ```
 {
-    name: String,
+  name: { type: String, required: true, unique: true },
+  capital: { type: String },
+  region: { type: String },
+  subregion: { type: String },
+  population: { type: String },
+  location: {
+    type: {
+      type: String,
+    },
+    coordinates: [Number],
+  },
+  area: { type: Number },
+  languages: { type: Array },
+  flag: { type: String },
+  regionalBlocs: { type: Array },
 }
 ``` 
+
+Trip model
+```
+{
+  name: { type: String },
+  users: [{ type: ObjectId, ref: 'User' }],
+  countries: [{
+    country: { type: ObjectId, ref: 'Country' },
+    dates: {
+      startDate: { type: Date },
+      endDate: { type: Date },
+    },
+  }],
+}
+``` 
+
+We design our database relationships so that trips would be the central piece of it. The main page each user accesses is the travel log which is a reference of all trips undertaken. Hypothetically, a trip can have few different users and can be composed of several countries. For version one though, we maintain a simple relation, one trip = one user = one country.
+
 ## Process
 
 - Planing: writing this readme and designing the wireframes
 ![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/wireframes.jpeg)
 
-- MVP will be created through pair programming.
-- Backlog will be made in collaborative mode spliting tasks.
+- First iteration of the app
+![alt First Iteration](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/first-iteration.jpg)
+
+- MVP was created entirely in pair programming to give us the same base before spliting tasks on backlog features. Also, we decided to work in pair when dealing with complicated features like implementing Instagram authentication through it API. And again when performing Mongo queries to calculate our travel statistics. This turned out to be very beneficial to our project.
+
 
 ## Links
 
@@ -122,7 +157,7 @@ The url to your repository and to your deployed project
 
 https://github.com/MR-Neto/TravelLog
 
-[Deploy Link](http://heroku.com)
+[Deploy Link](https://ironpassport.herokuapp.com/)
 
 ### Slides
 
