@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "seed": "node ./bin/seed",
+    "seed": "node ./bin/seed"
   },
   "dependencies": {
     "axios": "^0.18.0",
