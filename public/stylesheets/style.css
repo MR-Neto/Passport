@@ -81,8 +81,21 @@ p {
 
 }
 
-.form {
+#signup {
   margin-top: 3.25rem;
+  padding: 3rem 2rem;
+}
+
+#profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.25rem;
+  padding: 3rem 1rem;
+}
+
+#profile .form {
   padding: 3rem 2rem;
 }
 
@@ -164,3 +177,10 @@ p {
   height: 2rem;
 }
 
+#profile .save {
+  width: 78%;
+}
+
+#profile .delete-btn {
+  width: 22%;
+}
