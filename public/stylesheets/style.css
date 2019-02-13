@@ -227,8 +227,10 @@ p {
   z-index: 1;
   height: 3rem;
   width: 3rem;
-  /* border: none;
-  background-color: rgba(255, 240, 230, 0.5); */
+}
+
+#trip .button {
+  width: 30%;
 }
 
 
