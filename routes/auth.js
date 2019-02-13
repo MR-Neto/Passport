@@ -51,14 +51,18 @@ router.get('/login/instagram', async (req, res, next) => {
     const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);  
     //console.log(media.data.data);
 
+    const visitedCountries = [];
 
-    media.data.data.forEach((photo) => {
-      console.log('location object', photo.location);
-    });
+    for (let index = 0; index < media.data.data.length; index++) {
+      console.log('location object', media.data.data[index].location);
 
+      const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&key=${process.env.GMAPAPIKEY}`);  
+      console.log(geocode.data);
+
+      visitedCountries.push(geocode.data);
+    }
 
     res.redirect('/travellog');
-
   } catch (error) {
     next(error);
   }
