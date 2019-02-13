@@ -212,7 +212,6 @@ p {
   width: 100vw;
 }
 
-
 #profile .save {
   width: 78%;
 }
@@ -220,3 +219,16 @@ p {
 #profile .delete-btn {
   width: 22%;
 }
+
+.arrow {
+  position: absolute;
+  top: 4rem;
+  left: 0.5rem;
+  z-index: 1;
+  height: 3rem;
+  width: 3rem;
+  /* border: none;
+  background-color: rgba(255, 240, 230, 0.5); */
+}
+
+
