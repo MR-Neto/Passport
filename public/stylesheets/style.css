@@ -27,7 +27,7 @@ body {
   text-shadow: #111 0.5px 2px 3px;
   font-weight: 700;
   font-size: 2.5rem;
-  line-height: 2.2rem;
+  line-height: 3.2rem;
   text-align: center;
 }
 
@@ -94,6 +94,10 @@ p {
   padding: 3rem 2rem;
 }
 
+#signup .btn-instagram {
+  margin-top: 3.25rem;
+}
+
 #profile {
   display: flex;
   flex-direction: column;
@@ -112,6 +116,11 @@ p {
 }
 
 #trip .form {
+  margin-top: 3.25rem;
+  padding: 3rem 2rem;
+}
+
+#trip-details {
   margin-top: 3.25rem;
   padding: 3rem 2rem;
 }
@@ -164,6 +173,7 @@ p {
   color: #F7F5FB;
   width: 100%;
 }
+
 #travel-log .box {
   background: url(../img/trip-background.jpg) no-repeat center center;
   -webkit-background-size: cover;

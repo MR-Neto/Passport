@@ -49,22 +49,21 @@
     <div class="trip-list">
       <% trips.forEach((trip)=> { %>
       <% if(trip.countries[0].country.region === 'Europe') { %>
-      <div class="box europe">
+      <a href="/travellog/<%= trip.id %>" class="box europe">
       <% } else if(trip.countries[0].country.region === 'Asia') { %>
-      <div class="box asia">
+      <a href="/travellog/<%= trip.id %>" class="box asia">
       <% } else if(trip.countries[0].country.region === 'Americas') { %>
-      <div class="box americas">
+      <a href="/travellog/<%= trip.id %>" class="box americas">
       <% } else if(trip.countries[0].country.region === 'Africa') { %>
-      <div class="box africa">
+      <a href="/travellog/<%= trip.id %>" class="box africa">
       <% } else if(trip.countries[0].country.region === 'Oceania') { %>
-      <div class="box oceania">
+      <a href="/travellog/<%= trip.id %>" class="box oceania">
       <% } %>
         <h3 class="title is-3"><%= trip.name %></h3>
         <form action="/travellog/<%= trip.id %>/delete" method="POST">
           <button class="remove-trip-btn delete is-medium" type="submit">-</button>    
         </form> 
-      </div>
-      <script src="/js/setTripImage.js"></script>
+      </a>
       <% }) %>
     </div>
     <a class="button" href="/travellog/add">Add trip</a>
