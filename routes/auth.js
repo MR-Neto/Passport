@@ -31,6 +31,7 @@ router.get('/login/instagram', async (req, res, next) => {
       }),
     );
     const { username, profile_picture } = result.data.user;
+    const token = result.data.access_token;
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(username, salt);
     const user = await User.findOne({ username });
@@ -42,11 +43,16 @@ router.get('/login/instagram', async (req, res, next) => {
         isCreatedFromInstagram: true,
       });
       req.session.currentUser = userCreated;
-      res.redirect('/travellog');
     } else {
       req.session.currentUser = user;
-      res.redirect('/travellog');
     }
+
+    const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);
+    
+    console.log(media.data);
+
+    res.redirect('/travellog');
+
   } catch (error) {
     next(error);
   }
