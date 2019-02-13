@@ -87,9 +87,11 @@ router.post('/:id/delete', (req, res, next) => {
 router.get('/map', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
-  User.findById(_id).populate('travelLog')
-    .then((data) => {
-      res.render('map', { travelLog: data.travelLog, GMAPAPIKEY: process.env.GMAPAPIKEY });
+  Trip.find({ users: _id }).populate('countries.country')
+    .then((trips) => {
+      const countries = Statistics.uniqueArray(Statistics.flattenArray(trips));
+      console.log("COUNTRIES ARRAY PASSED TO MAPS: ",countries);
+      res.render('map', { countries, GMAPAPIKEY: process.env.GMAPAPIKEY });
     })
     .catch((error) => {
       next(error);
