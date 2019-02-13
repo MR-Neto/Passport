@@ -1,14 +1,55 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
+const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
 const loggedInRoute = require('../middlewares/loggedIn');
+require('dotenv').config();
 
 const router = express.Router();
 const bcryptSalt = 10;
 
 router.get('/login', loggedInRoute, (req, res, next) => {
-  res.render('auth/login');
+  const clientId = process.env.CLIENT_ID;
+  const redirectUri = process.env.REDIRECT_URI;
+  res.render('auth/login', { clientId, redirectUri });
+});
+
+router.get('/login/instagram', async (req, res, next) => {
+  const { code } = req.query;
+
+  try {
+    const result = await axios.post(
+      'https://api.instagram.com/oauth/access_token',
+      qs.stringify({
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        grant_type: 'authorization_code',
+        redirect_uri: process.env.REDIRECT_URI,
+        code,
+      }),
+    );
+    const { username, profile_picture } = result.data.user;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(username, salt);
+    const user = await User.findOne({ username });
+    if (!user) {
+      const userCreated = await User.create({
+        username,
+        password: hashPass,
+        profilePicture: profile_picture,
+        isCreatedFromInstagram: true,
+      });
+      req.session.currentUser = userCreated;
+      res.redirect('/travellog');
+    } else {
+      req.session.currentUser = user;
+      res.redirect('/travellog');
+    }
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/login', (req, res, next) => {
@@ -20,7 +61,10 @@ router.post('/login', (req, res, next) => {
   }
   User.findOne({ username })
     .then((user) => {
-      if (!user) {
+      console.log("USER LOGIN: ", user);
+      console.log("USER type: ", typeof user);
+
+      if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
         res.redirect('/auth/login');
       }
@@ -39,11 +83,13 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/signup', loggedInRoute, (req, res, next) => {
+  const clientId = process.env.CLIENT_ID;
+  const redirectUri = process.env.REDIRECT_URI;
   Country.find({})
-    .then((countries) => {
-      res.render('auth/signup', { countries });
+    .then(countries => {
+      res.render('auth/signup', { countries, clientId, redirectUri });
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
@@ -63,13 +109,13 @@ router.post('/signup', (req, res, next) => {
         User.create({
           username,
           password: hashPass,
-          homeCountry,
+          homeCountry
         })
-          .then((userCreated) => {
+          .then(userCreated => {
             req.session.currentUser = userCreated;
             res.redirect('/travellog');
           })
-          .catch((error) => {
+          .catch(error => {
             next(error);
           });
       } else {
@@ -77,14 +123,13 @@ router.post('/signup', (req, res, next) => {
         res.redirect('/auth/signup');
       }
     })
-    .catch((error) => {
+    .catch(error => {
       next(error);
     });
 });
 
-
 router.get('/logout', (req, res, next) => {
-  req.session.destroy((err) => {
+  req.session.destroy(err => {
     // cannot access session here
     res.redirect('/');
   });
