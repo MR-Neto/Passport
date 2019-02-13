@@ -47,9 +47,15 @@ router.get('/login/instagram', async (req, res, next) => {
       req.session.currentUser = user;
     }
 
-    const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);
-    
-    console.log(media.data);
+    // HOW TO PROTECT THE TOKEN????
+    const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);  
+    //console.log(media.data.data);
+
+
+    media.data.data.forEach((photo) => {
+      console.log('location object', photo.location);
+    });
+
 
     res.redirect('/travellog');
 
