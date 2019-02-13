@@ -137,10 +137,6 @@ p {
   padding: 1rem 2rem;
 }
 
-.log {
-  margin-top: 20%;
-}
-
 /* ---- components ---- */
 
 #home-banner .button {
@@ -157,7 +153,7 @@ p {
   text-decoration: underline;
 }
 
-.button {
+.action {
   background-color: #F58A07;
   color: #F7F5FB;
   border: none;
@@ -172,6 +168,7 @@ p {
   background-color: #517fa4;
   color: #F7F5FB;
   width: 100%;
+  border: none;
 }
 
 #travel-log .box {
@@ -188,20 +185,13 @@ p {
   padding: 2rem;
 }
 
+#travel-log .field {
+  margin-top: 2rem;
+}
+
 #travel-log .log>a {
   margin-top: 2rem;
   width: 5rem;
-}
-
-#travel-log .trip-list li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #006989;
-  color:#F7F5FB;
-  height: 3rem;
-  margin-bottom: 1rem;
 }
 
 #travel-log form {

@@ -61,9 +61,6 @@ router.post('/login', (req, res, next) => {
   }
   User.findOne({ username })
     .then((user) => {
-      console.log('USER LOGIN: ', user);
-      console.log('USER type: ', typeof user);
-
       if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
         res.redirect('/auth/login');

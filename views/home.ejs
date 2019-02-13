@@ -19,7 +19,9 @@
       <div class="container">
         <% if(!currentUser) { %>
         <h1>Keep track of your trips with Passport.</h1>
-        <a class="button" href="#">Sign Up</a>
+        <div class="field is-grouped is-grouped-centered">
+          <a class="button action" href="#">Sign Up</a>
+        </div>
         <% } else { %>
         <h1>Welcome back <%= currentUser.username %></h1>
         <% } %>
