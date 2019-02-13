@@ -21,14 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+  if (signUpBtn) {
+    signUpBtn.addEventListener('click', () => {
+      modal.classList.toggle('is-active');
+      html.classList.toggle('is-clipped');
+    });
+  }
 
-  signUpBtn.addEventListener('click', () => {
-    modal.classList.toggle('is-active');
-    html.classList.toggle('is-clipped');
-  });
-
-  modalCloseBtn.addEventListener('click', () => {
-    modal.classList.toggle('is-active');
-    html.classList.toggle('is-clipped');
-  });
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => {
+      modal.classList.toggle('is-active');
+      html.classList.toggle('is-clipped');
+    });
+  }
 });
