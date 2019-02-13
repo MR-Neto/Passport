@@ -73,6 +73,19 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.get('/map', (req, res, next) => {
+  const { _id } = req.session.currentUser;
+
+  Trip.find({ users: _id }).populate('countries.country')
+    .then((trips) => {
+      const countries = Statistics.uniqueArray(Statistics.flattenArray(trips));
+      res.render('map', { countries, GMAPAPIKEY: process.env.GMAPAPIKEY });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
   console.log(id);
@@ -97,17 +110,6 @@ router.post('/:id/delete', (req, res, next) => {
     });
 });
 
-router.get('/map', (req, res, next) => {
-  const { _id } = req.session.currentUser;
 
-  Trip.find({ users: _id }).populate('countries.country')
-    .then((trips) => {
-      const countries = Statistics.uniqueArray(Statistics.flattenArray(trips));
-      res.render('map', { countries, GMAPAPIKEY: process.env.GMAPAPIKEY });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
 
 module.exports = router;
