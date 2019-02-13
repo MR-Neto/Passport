@@ -91,11 +91,6 @@ router.get('/map', (req, res, next) => {
   Trip.find({ users: _id }).populate('countries.country')
     .then((trips) => {
       const countries = Statistics.uniqueArray(Statistics.flattenArray(trips));
-
-      countries.forEach((country) => {
-        console.log(country.coordinates.coordinates[0][0][1]);
-      });
-
       res.render('map', { countries, GMAPAPIKEY: process.env.GMAPAPIKEY });
     })
     .catch((error) => {

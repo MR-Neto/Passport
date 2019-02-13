@@ -16,34 +16,27 @@
 
   var countries =<%-JSON.stringify(countries)%>
 
+  // countries.forEach((country)=>{
+  //   var marker = new google.maps.Marker({
+  //     position: {lat:country.location.coordinates[1] , lng:country.location.coordinates[0]},
+  //     map: map,
+  //     title: country.name
+  //   });
+  // });
+
   countries.forEach((country)=>{
-    var marker = new google.maps.Marker({
-      position: {lat:country.location.coordinates[1] , lng:country.location.coordinates[0]},
-      map: map,
-      title: country.name
+
+    const restriction = `"name = '${country.name}'"`;
+    const layer = new google.maps.FusionTablesLayer({
+      query: {
+        select: "'geometry'",
+        from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+        where: restriction
+      }
     });
+    layer.setMap(map);  
   });
 
-  var layer = new google.maps.FusionTablesLayer({
-    query: {
-      select: 'geometry',
-      from: '1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm'
-    },styles: [{
-      polygonOptions: {
-        fillColor: '#00FF00',
-        fillOpacity: 0.1
-      }
-    }, {
-      where: 'name = Malta',
-      polygonOptions: {
-        fillColor: '#0000FF',
-        fillOpacity: 0.5
-      }
-    }]
-  });
 
-  console.log(layer);
-  layer.setMap(map);
 
-  
 </script>

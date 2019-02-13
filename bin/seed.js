@@ -15,8 +15,6 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then((res) => {
     console.log('accessed API');
     const { data } = res;
-    console.log(data[0]);
-
     const cleanData = data.map((country) => {
       let lat = country.latlng[0] || 0;
       let lng = country.latlng[1] || 0;
