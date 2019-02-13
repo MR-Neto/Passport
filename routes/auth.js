@@ -57,7 +57,7 @@ router.get('/login/instagram', async (req, res, next) => {
       if (media.data.data[index].location) {
         console.log('location object', media.data.data[index].location);
   
-        const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&key=${process.env.GMAPAPIKEY}`);  
+        const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&key=${process.env.GEOCODEAPIKEY}`);  
         console.log(geocode.data);
   
         visitedCountries.push(geocode.data);
