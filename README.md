@@ -136,7 +136,7 @@ We design our database relationships so that trips would be the central piece of
 ![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/wireframes.jpeg)
 
 - First iteration of the app
-![alt Wireframes](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/first-iteration.png)
+![alt First Iteration](https://github.com/MR-Neto/TravelLog/blob/master/readmeAssets/first-iteration.jpg)
 
 - MVP was created entirely in pair programming to give us the same base before spliting tasks on backlog features. Also, we decided to work in pair when dealing with complicated features like implementing Instagram authentication through it API. And again when performing Mongo queries to calculate our travel statistics. This turned out to be very beneficial to our project.
 
