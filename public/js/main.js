@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalCloseBtn = document.querySelector('.modal-close');
   const html = document.querySelector('html');
   const notification = document.querySelector('.notification');
+  const instagramBtn = document.querySelector('.btn-instagram');
 
   // Check if there are any navbar burgers
   if (navbarBurgers.length > 0) {
@@ -39,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (notification) {
     notification.addEventListener('click', () => {
       notification.remove();
+    });
+  }
+
+  if (instagramBtn) {
+    instagramBtn.addEventListener('click', () => {
+      instagramBtn.classList.add('is-loading');
     });
   }
 });
