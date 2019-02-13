@@ -48,11 +48,12 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.post('/delete', (req, res, next) => {
+router.get('/delete', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
   User.findByIdAndDelete(_id)
     .then(() => {
+      req.session.destroy();
       res.redirect('/');
     })
     .catch((error) => {

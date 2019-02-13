@@ -23,11 +23,16 @@ body {
 
 #home-banner h1 {
   font-family: 'Lato', sans-serif;  font-size: 16px;
-  color: #006989;
+  color: #F7F5FB;
+  text-shadow: #111 0.5px 2px 3px;
   font-weight: 700;
-  font-size: 2.2rem;
-  line-height: 2.2rem;
-  text-align: right;
+  font-size: 2.5rem;
+  line-height: 3.2rem;
+  text-align: center;
+}
+
+#home form label {
+  color: #F7F5FB;
 }
 
 #login h1 {
@@ -49,7 +54,10 @@ body {
 
 h2 {}
 
-h3 {}
+#travel-log h3 {
+  color: #F7F5FB;
+  text-shadow: #111 0.5px 2px 3px;
+}
 
 p {
   margin: 0;
@@ -81,7 +89,38 @@ p {
 
 }
 
-.form {
+#signup {
+  margin-top: 3.25rem;
+  padding: 3rem 2rem;
+}
+
+#signup .btn-instagram {
+  margin-top: 3.25rem;
+}
+
+#profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.25rem;
+  padding: 3rem 1rem;
+}
+
+#profile .form {
+  padding: 3rem 2rem;
+}
+
+#trip {
+  margin-top: 3.25rem;
+}
+
+#trip .form {
+  margin-top: 3.25rem;
+  padding: 3rem 2rem;
+}
+
+#trip-details {
   margin-top: 3.25rem;
   padding: 3rem 2rem;
 }
@@ -135,6 +174,14 @@ p {
   width: 100%;
 }
 
+#travel-log .box {
+  background: url(../img/trip-background.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 #travel-log .log {
   display: flex;
   flex-direction: column;
@@ -142,6 +189,7 @@ p {
 }
 
 #travel-log .log>a {
+  margin-top: 2rem;
   width: 5rem;
 }
 
@@ -156,12 +204,11 @@ p {
   margin-bottom: 1rem;
 }
 
-.remove-trip-btn  {
-  background-color: #F7F5FB;
-  border-radius: 50%;
-  border: none;
-  width: 2rem;
-  height: 2rem;
+#travel-log form {
+  display: inline-block;
+  position: relative;
+  left: 94%;
+  bottom: 4.2rem;
 }
 
 /* ---- maps ---- */
@@ -173,4 +220,13 @@ p {
 .map-container{
   height: 100vh;
   width: 100vw;
+}
+
+
+#profile .save {
+  width: 78%;
+}
+
+#profile .delete-btn {
+  width: 22%;
 }

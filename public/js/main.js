@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const signUpBtn = document.querySelector('#home-banner a');
   const modalCloseBtn = document.querySelector('.modal-close');
   const html = document.querySelector('html');
+  const notification = document.querySelector('.notification');
+  const instagramBtn = document.querySelector('.btn-instagram');
 
   // Check if there are any navbar burgers
   if (navbarBurgers.length > 0) {
@@ -21,14 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+  if (signUpBtn) {
+    signUpBtn.addEventListener('click', () => {
+      modal.classList.toggle('is-active');
+      html.classList.toggle('is-clipped');
+    });
+  }
 
-  signUpBtn.addEventListener('click', () => {
-    modal.classList.toggle('is-active');
-    html.classList.toggle('is-clipped');
-  });
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => {
+      modal.classList.toggle('is-active');
+      html.classList.toggle('is-clipped');
+    });
+  }
 
-  modalCloseBtn.addEventListener('click', () => {
-    modal.classList.toggle('is-active');
-    html.classList.toggle('is-clipped');
-  });
+  if (notification) {
+    notification.addEventListener('click', () => {
+      notification.remove();
+    });
+  }
+
+  if (instagramBtn) {
+    instagramBtn.addEventListener('click', () => {
+      instagramBtn.classList.add('is-loading');
+    });
+  }
 });

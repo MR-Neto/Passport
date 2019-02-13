@@ -61,8 +61,8 @@ router.post('/login', (req, res, next) => {
   }
   User.findOne({ username })
     .then((user) => {
-      console.log("USER LOGIN: ", user);
-      console.log("USER type: ", typeof user);
+      console.log('USER LOGIN: ', user);
+      console.log('USER type: ', typeof user);
 
       if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
@@ -86,10 +86,10 @@ router.get('/signup', loggedInRoute, (req, res, next) => {
   const clientId = process.env.CLIENT_ID;
   const redirectUri = process.env.REDIRECT_URI;
   Country.find({})
-    .then(countries => {
+    .then((countries) => {
       res.render('auth/signup', { countries, clientId, redirectUri });
     })
-    .catch(error => {
+    .catch((error) => {
       next(error);
     });
 });
@@ -109,13 +109,13 @@ router.post('/signup', (req, res, next) => {
         User.create({
           username,
           password: hashPass,
-          homeCountry
+          homeCountry,
         })
-          .then(userCreated => {
+          .then((userCreated) => {
             req.session.currentUser = userCreated;
             res.redirect('/travellog');
           })
-          .catch(error => {
+          .catch((error) => {
             next(error);
           });
       } else {
@@ -123,13 +123,13 @@ router.post('/signup', (req, res, next) => {
         res.redirect('/auth/signup');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       next(error);
     });
 });
 
 router.get('/logout', (req, res, next) => {
-  req.session.destroy(err => {
+  req.session.destroy(() => {
     // cannot access session here
     res.redirect('/');
   });
