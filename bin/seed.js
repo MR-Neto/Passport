@@ -10,11 +10,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   })
   .then(() => {
     console.log('deleted');
-    return axios.get('https://restcountries.eu/rest/v2/all?fields=name;capital;region;subregion;population;latlng;area;languages;flag;regionalBlocs');
+    return axios.get('https://restcountries.eu/rest/v2/all?fields=name;capital;region;subregion;population;latlng;area;languages;flag;regionalBlocs;alpha2Code');
   })
   .then((res) => {
     console.log('accessed API');
     const { data } = res;
+    console.log(data[0]);
+
     const cleanData = data.map((country) => {
       let lat = country.latlng[0] || 0;
       let lng = country.latlng[1] || 0;

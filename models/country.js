@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+//const GeoJSON = require('mongoose-geojson-schema');
 
 const { Schema } = mongoose;
 
@@ -18,6 +19,12 @@ const countrySchema = new Schema({
   languages: { type: Array },
   flag: { type: String },
   regionalBlocs: { type: Array },
+  coordinates: {
+    type: {
+      type: String,
+    },
+    coordinates: [[[Number]]],
+  },
 });
 
 countrySchema.index({ location: '2dsphere' });

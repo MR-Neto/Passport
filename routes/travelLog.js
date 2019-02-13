@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const axios = require('axios');
 const Country = require('../models/country');
 const User = require('../models/user');
 const Trip = require('../models/trip');
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
       const numOfCountries = Statistics.calculateNumOfCountries(trips);
       const areaCovered = Statistics.calculateArea(trips);
       const totalWorldArea = Statistics.worldArea;
-      const percentageArea = Math.round(areaCovered / totalWorldArea*100*100)/100;
+      const percentageArea = Math.round(areaCovered / totalWorldArea * 100 * 100) / 100;
       const lastVisitedCountryFlag = Statistics.getLastVisiteCountryFlag(trips);
       const numOfContinents = Statistics.calculateContinents(trips);
 
@@ -90,7 +91,11 @@ router.get('/map', (req, res, next) => {
   Trip.find({ users: _id }).populate('countries.country')
     .then((trips) => {
       const countries = Statistics.uniqueArray(Statistics.flattenArray(trips));
-      console.log("COUNTRIES ARRAY PASSED TO MAPS: ",countries);
+
+      countries.forEach((country) => {
+        console.log(country.coordinates.coordinates[0][0][1]);
+      });
+
       res.render('map', { countries, GMAPAPIKEY: process.env.GMAPAPIKEY });
     })
     .catch((error) => {

@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "seed": "node ./bin/seed"
+    "seed": "node ./bin/seed",
+    "seed-new": "node ./bin/seed1",
+    "coordinates": "node ./bin/coordinates"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -22,6 +24,7 @@
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
     "mongoose": "^5.4.9",
+    "mongoose-geojson-schema": "^2.1.3",
     "morgan": "~1.9.0",
     "query-string": "^6.2.0"
   },
