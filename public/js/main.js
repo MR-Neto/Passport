@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const signUpBtn = document.querySelector('#home-banner a');
   const modalCloseBtn = document.querySelector('.modal-close');
   const html = document.querySelector('html');
+  const notification = document.querySelector('.notification');
 
   // Check if there are any navbar burgers
   if (navbarBurgers.length > 0) {
@@ -32,6 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalCloseBtn.addEventListener('click', () => {
       modal.classList.toggle('is-active');
       html.classList.toggle('is-clipped');
+    });
+  }
+
+  if (notification) {
+    notification.addEventListener('click', () => {
+      notification.remove();
     });
   }
 });

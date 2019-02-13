@@ -1,11 +1,13 @@
 <% infoMessages && infoMessages.forEach((message) => { %>
-<div class="alert alert-info">
-<%- message %>
+<div class="notification is-info">
+  <button class="delete"></button>
+  <%- message %>
 </div>
 <% })
 errorMessages && errorMessages.forEach((message) => { %>
-<div class="alert alert-danger">
-<%- message %>
+<div class="notification is-warning">
+  <button class="delete"></button>
+  <%- message %>
 </div>
 <% }) %>
 
