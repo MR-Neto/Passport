@@ -30,6 +30,9 @@ router.post('/', (req, res, next) => {
       if (!user) {
         User.findByIdAndUpdate(_id, { username, homeCountry })
           .then(() => {
+            // Update User session with new properties
+            req.session.currentUser.username = username;
+            req.session.currentUser.homeCountry = homeCountry;
             res.redirect('/travellog');
           })
           .catch((err) => {
