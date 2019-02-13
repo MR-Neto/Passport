@@ -44,7 +44,22 @@
     </div>
     <!-- Statitics summary end -->
   </div>
+  <hr>
+  <div class="field is-grouped is-grouped-centered">
+    <p class="control">
+      <a class="button" href="/travellog/map">
+        <span class="icon is-small">
+          <i class="fas fa-map-marked-alt"></i>
+        </span>
+        <span>Check map</span> 
+      </a>
+    </p>
+    <p class="control">
+      <a class="button action" href="/travellog/add">Add trip</a>
+    </p>
+</div>
 
+  
   <div class="container log">
     <div class="trip-list">
       <% trips.forEach((trip)=> { %>
@@ -66,7 +81,6 @@
       </a>
       <% }) %>
     </div>
-    <a class="button" href="/travellog/add">Add trip</a>
   </div>
 </div>
 <script src="/js/setTripImage.js"></script>
