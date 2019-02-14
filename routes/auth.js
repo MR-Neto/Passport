@@ -49,19 +49,19 @@ router.get('/login/instagram', async (req, res, next) => {
 
     // HOW TO PROTECT THE TOKEN????
     const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);  
-    console.log(media.data.data);
+    //console.log(media.data.data);
 
     const visitedCountries = [];
 
     for (let index = 0; index < media.data.data.length; index++) {
-      console.log("media.data.data[index].location", media.data.data[index].location);
+      //console.log("media.data.data[index].location", media.data.data[index].location);
 
       if (media.data.data[index].location) {
         // console.log('location object', media.data.data[index].location);
 
         const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);  
         // console.log(geocode.data.results[0].formatted_address);
-        console.log("GEOCODE DATA RESULTS ",geocode.data.results);
+        //console.log("GEOCODE DATA RESULTS ",geocode.data.results);
         if (geocode.data.results.length > 0 && media.data.data[index].images.low_resolution.url) {
           const country = {
             imageUrl: media.data.data[index].images.low_resolution.url,
@@ -80,24 +80,22 @@ router.get('/login/instagram', async (req, res, next) => {
     for (let index = 0; index < visitedCountries.length; index++) {
       visitedCountries[index].countryID=countries.find((country)=>{
         return country.name === visitedCountries[index].name;
-      })._id;
-
-      
+      })._id;      
     }
     console.log("VISITED COUNTRIES", visitedCountries);
 
-    const tripSchema = new Schema({
-      name: { type: String },
-      img: { type: String },
-      users: [{ type: ObjectId, ref: 'User' }],
-      countries: [{
-        country: { type: ObjectId, ref: 'Country' },
-        dates: {
-          startDate: { type: Date },
-          endDate: { type: Date },
-        },
-      }],
-    }
+    // const tripSchema = new Schema({
+    //   name: { type: String },
+    //   img: { type: String },
+    //   users: [{ type: ObjectId, ref: 'User' }],
+    //   countries: [{
+    //     country: { type: ObjectId, ref: 'Country' },
+    //     dates: {
+    //       startDate: { type: Date },
+    //       endDate: { type: Date },
+    //     },
+    //   }],
+    // }
 
 
 
