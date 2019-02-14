@@ -4,6 +4,8 @@ const axios = require('axios');
 const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 const loggedInRoute = require('../middlewares/loggedIn');
 require('dotenv').config();
 
@@ -64,8 +66,9 @@ router.get('/login/instagram', async (req, res, next) => {
         //console.log("GEOCODE DATA RESULTS ",geocode.data.results);
         if (geocode.data.results.length > 0 && media.data.data[index].images.low_resolution.url) {
           const country = {
-            imageUrl: media.data.data[index].images.low_resolution.url,
+            img: media.data.data[index].images.low_resolution.url,
             name: geocode.data.results[0].formatted_address,
+            users: [ObjectId(req.session.currentUser._id)],
           };
           //console.log(country);
           visitedCountries.push(country);
@@ -78,11 +81,15 @@ router.get('/login/instagram', async (req, res, next) => {
 
 
     for (let index = 0; index < visitedCountries.length; index++) {
-      visitedCountries[index].countryID=countries.find((country)=>{
-        return country.name === visitedCountries[index].name;
-      })._id;      
+      visitedCountries[index].countries = [{
+        country: countries.find((country) => {
+          return country.name === visitedCountries[index].name;
+        })._id,
+      }];
     }
     console.log("VISITED COUNTRIES", visitedCountries);
+
+
 
     // const tripSchema = new Schema({
     //   name: { type: String },
