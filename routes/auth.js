@@ -73,27 +73,31 @@ router.get('/login/instagram', async (req, res, next) => {
       }
     }
 
-    for (let index = 0; index < visitedCountries.length; index++) {
-      const countryDoc = await Country.findOne({name: visitedCountries[index].name});
 
-      console.log("country DOC", countryDoc);
+    const countries = await Country.find({});
+
+
+    for (let index = 0; index < visitedCountries.length; index++) {
+      visitedCountries[index].countryID=countries.find((country)=>{
+        return country.name === visitedCountries[index].name;
+      })._id;
+
       
     }
+    console.log("VISITED COUNTRIES", visitedCountries);
 
-
-
-    // const tripSchema = new Schema({
-    //   name: { type: String },
-    //   img: { type: String },
-    //   users: [{ type: ObjectId, ref: 'User' }],
-    //   countries: [{
-    //     country: { type: ObjectId, ref: 'Country' },
-    //     dates: {
-    //       startDate: { type: Date },
-    //       endDate: { type: Date },
-    //     },
-    //   }],
-    // }
+    const tripSchema = new Schema({
+      name: { type: String },
+      img: { type: String },
+      users: [{ type: ObjectId, ref: 'User' }],
+      countries: [{
+        country: { type: ObjectId, ref: 'Country' },
+        dates: {
+          startDate: { type: Date },
+          endDate: { type: Date },
+        },
+      }],
+    }
 
 
 
