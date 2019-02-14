@@ -23,7 +23,7 @@ router.get('/login/instagram', async (req, res, next) => {
   const { code } = req.query;
 
   try {
-    const result = await axios.post(
+    const tokenResult = await axios.post(
       'https://api.instagram.com/oauth/access_token',
       qs.stringify({
         client_id: process.env.CLIENT_ID,
@@ -33,12 +33,12 @@ router.get('/login/instagram', async (req, res, next) => {
         code,
       }),
     );
-    const { username, profile_picture } = result.data.user;
-    const token = result.data.access_token;
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(username, salt);
+    const { username, profile_picture } = tokenResult.data.user;
+    const token = tokenResult.data.access_token;
     const user = await User.findOne({ username });
     if (!user) {
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(username, salt);
       const userCreated = await User.create({
         username,
         password: hashPass,
@@ -46,72 +46,39 @@ router.get('/login/instagram', async (req, res, next) => {
         isCreatedFromInstagram: true,
       });
       req.session.currentUser = userCreated;
+
+      // HOW TO PROTECT THE TOKEN????
+      const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);
+
+      const instagramTrips = [];
+
+      for (let index = 0; index < media.data.data.length; index++) {
+        if (media.data.data[index].location) {
+          const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);
+          if (geocode.data.results.length > 0 && media.data.data[index].images.low_resolution.url) {
+            const trip = {
+              img: media.data.data[index].images.low_resolution.url,
+              name: geocode.data.results[0].formatted_address,
+              users: [ObjectId(req.session.currentUser._id)],
+            };
+            instagramTrips.push(trip);
+          }
+        }
+      }
+
+      const countries = await Country.find({});
+
+      for (let index = 0; index < instagramTrips.length; index++) {
+        instagramTrips[index].countries = [{
+          country: countries.find((country) => {
+            return country.name === instagramTrips[index].name;
+          })._id,
+        }];
+      }
+      const createdTrips = await Trip.insertMany(instagramTrips);
     } else {
       req.session.currentUser = user;
     }
-
-    // HOW TO PROTECT THE TOKEN????
-    const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);  
-    //console.log(media.data.data);
-
-    const visitedCountries = [];
-
-    for (let index = 0; index < media.data.data.length; index++) {
-      //console.log("media.data.data[index].location", media.data.data[index].location);
-
-      if (media.data.data[index].location) {
-        // console.log('location object', media.data.data[index].location);
-
-        const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);  
-        // console.log(geocode.data.results[0].formatted_address);
-        //console.log("GEOCODE DATA RESULTS ",geocode.data.results);
-        if (geocode.data.results.length > 0 && media.data.data[index].images.low_resolution.url) {
-          const country = {
-            img: media.data.data[index].images.low_resolution.url,
-            name: geocode.data.results[0].formatted_address,
-            users: [ObjectId(req.session.currentUser._id)],
-          };
-          //console.log(country);
-          visitedCountries.push(country);
-        }
-      }
-    }
-
-
-    const countries = await Country.find({});
-
-
-    for (let index = 0; index < visitedCountries.length; index++) {
-      visitedCountries[index].countries = [{
-        country: countries.find((country) => {
-          return country.name === visitedCountries[index].name;
-        })._id,
-      }];
-    }
-    //console.log("VISITED COUNTRIES", visitedCountries);
-
-
-    const createdTrips = await Trip.insertMany(visitedCountries);
-
-    console.log("Created Trips", createdTrips);
-
-
-    // const tripSchema = new Schema({
-    //   name: { type: String },
-    //   img: { type: String },
-    //   users: [{ type: ObjectId, ref: 'User' }],
-    //   countries: [{
-    //     country: { type: ObjectId, ref: 'Country' },
-    //     dates: {
-    //       startDate: { type: Date },
-    //       endDate: { type: Date },
-    //     },
-    //   }],
-    // }
-
-
-
-
 
     res.redirect('/travellog');
   } catch (error) {

@@ -172,12 +172,6 @@ p {
 }
 
 #travel-log .box {
-  /* background: url(../img/trip-background.jpg) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
-
   height: 15rem;
 }
 
