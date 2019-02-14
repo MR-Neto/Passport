@@ -1,19 +1,29 @@
 <%- include partials/header.ejs %>
+<a href="/travellog" class="button arrow">
+    <span class="icon is-medium">
+      <i class="fas fa-arrow-left"></i>
+    </span>
+</a>
 <div class="container" id="trip-details">
-  
-  <figure class="image is-128x128">
-    <img src="<%= trip.countries[0].country.flag %>" alt="country-flag">
-  </figure>
-  <h5 class="title is-5">You have visited <%= trip.countries[0].country.name %></h5>
-  <section class="section">
-   <p>
-    Your trip was from <%= trip.countries[0].dates.startDate %>
-    until <%= trip.countries[0].dates.endDate %>
-   </p> 
-  </section>
-  <section clas="section">
-    <p>
-    It is part of <%= trip.countries[0].country.region %> and has <%= trip.countries[0].country.capital %> for capital.
-    </p> 
-  </section>
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="<%= flag %>" alt="country-flag">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <h5 class="title is-5">You have visited <%= name %></h5>
+        </div>
+      </div>
+      <div class="content">
+        <p>It is part of <%= region %> and has <%= capital %> for capital.</p> 
+        <br>
+        <% if (startDate && endDate) { %>
+        <time>From <%= startDate %> - until <%= endDate %></time>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </div>

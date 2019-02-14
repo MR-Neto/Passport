@@ -10,8 +10,8 @@ router.get('/', (req, res, next) => {
     .then((countries) => {
       res.render('profile', { countries });
     })
-    .catch((err) => {
-      next(err);
+    .catch((error) => {
+      next(error);
     });
 });
 
@@ -20,32 +20,56 @@ router.post('/', (req, res, next) => {
   const { _id } = req.session.currentUser;
 
   if (username === '' || homeCountry === '') {
-    // res.render('partials/signup', {
-    //   errorMessage: 'Indicate a username and a password to sign up'
-    // });
     return;
   }
-  User.findOne({ username })
-    .then((user) => {
-      if (!user) {
-        User.findByIdAndUpdate(_id, { username, homeCountry })
-          .then(() => {
-            // Update User session with new properties
-            req.session.currentUser.username = username;
-            req.session.currentUser.homeCountry = homeCountry;
-            res.redirect('/travellog');
-          })
-          .catch((err) => {
-            next(err);
-          });
-      } else {
-        req.flash('error', 'Incorrect values');
-        res.redirect('/profile');
-      }
-    })
-    .catch((error) => {
-      next(error);
-    });
+  const sanitizedUsername = req.sanitize(username);
+  const trimmedUsername = sanitizedUsername.trim();
+
+  // In case you do not change the username
+  if (req.session.currentUser.username === trimmedUsername) {
+    User.findByIdAndUpdate(_id, { homeCountry })
+      .then(() => {
+        // Update User session with new properties
+        req.session.currentUser.homeCountry = homeCountry;
+        res.redirect('/travellog');
+      })
+      .catch((err) => {
+        next(err);
+      });
+  // In case you do not change the country of origin
+  } else if (!homeCountry) {
+    User.findByIdAndUpdate(_id, { username: trimmedUsername })
+      .then(() => {
+        // Update User session with new properties
+        req.session.currentUser.username = trimmedUsername;
+        res.redirect('/travellog');
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    User.findOne({ username: trimmedUsername })
+      .then((user) => {
+        if (!user) {
+          User.findByIdAndUpdate(_id, { username, homeCountry })
+            .then(() => {
+              // Update User session with new properties
+              req.session.currentUser.username = trimmedUsername;
+              req.session.currentUser.homeCountry = homeCountry;
+              res.redirect('/travellog');
+            })
+            .catch((error) => {
+              next(error);
+            });
+        } else {
+          req.flash('error', 'Incorrect values');
+          res.redirect('/profile');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
 });
 
 router.get('/delete', (req, res, next) => {

@@ -112,7 +112,7 @@ p {
 }
 
 #trip {
-  margin-top: 3.25rem;
+  margin-top: 5.25rem;
 }
 
 #trip .form {
@@ -121,7 +121,7 @@ p {
 }
 
 #trip-details {
-  margin-top: 3.25rem;
+  margin-top: 5.25rem;
   padding: 3rem 2rem;
 }
 
@@ -223,8 +223,10 @@ p {
   z-index: 1;
   height: 3rem;
   width: 3rem;
-  /* border: none;
-  background-color: rgba(255, 240, 230, 0.5); */
+}
+
+#trip .button {
+  width: 30%;
 }
 
 #comparison-search-bar{

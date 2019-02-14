@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const expressSanitizer = require('express-sanitizer');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 require("dotenv").config();
@@ -33,6 +34,7 @@ app.set('layout extractScripts', true);
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(expressSanitizer());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -66,18 +68,29 @@ app.use('/profile', protectedRoute, profileRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  console.log('YEASSSSS 1');
   next(createError(404));
 });
 
 // error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use((error, req, res) => {
+  console.log('YEASSSSS 2');
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('partials/error');
+  // Production mode
+  let message;
+  if (error.status === 404) {
+    message = 'You got lost wanderer...';
+    res.render('error', message);
+  } else if (error.status || 500) {
+    message = 'It seems our dear Passport broke. Try again later';
+    res.render('error', message);
+  }
+  // // set locals, only providing error in development
+  // res.locals.message = error.message;
+  // res.locals.error = req.app.get('env') === 'development' ? error : {};
+  // // render the error page
+  // res.status(error.status || 500);
+  // res.render('partials/error');
 });
 
 module.exports = app;
