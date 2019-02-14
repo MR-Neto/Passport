@@ -88,12 +88,13 @@ router.get('/login/instagram', async (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
+  const trimmedUsername = username.trim();
 
   if (username === '' || password === '') {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/login');
   }
-  User.findOne({ username })
+  User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
@@ -127,6 +128,7 @@ router.get('/signup', loggedInRoute, (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const { username, password, homeCountry } = req.body;
+  const trimmedUsername = username.trim();
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -134,11 +136,11 @@ router.post('/signup', (req, res, next) => {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/signup');
   }
-  User.findOne({ username })
+  User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user) {
         User.create({
-          username,
+          username: trimmedUsername,
           password: hashPass,
           homeCountry,
         })
