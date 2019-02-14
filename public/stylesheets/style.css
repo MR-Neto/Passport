@@ -227,4 +227,28 @@ p {
   background-color: rgba(255, 240, 230, 0.5); */
 }
 
+#comparison-search-bar{
+  margin-top: 9vh;
+  display: flex;
+
+}
+
+#comparison-search-bar .action{
+  z-index: 1;
+}
+
+.comparison-form{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#map-comparison {
+  height: 100%;
+}
+
+.map-container-comparison{
+  height: 83vh;
+  width: 100vw;
+}
 
