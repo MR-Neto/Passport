@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
+const moment = require('moment');
 const Country = require('../models/country');
-const User = require('../models/user');
 const Trip = require('../models/trip');
 const Statistics = require('../helper/statistics');
 require('dotenv').config();
@@ -111,10 +111,22 @@ router.get('/map', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   Trip.findById(id).populate('countries.country')
     .then((trip) => {
-      res.render('trip-details', { trip });
+      const startDate = moment(trip.countries[0].dates.startDate).format('MMM Do YYYY');
+      const endDate = moment(trip.countries[0].dates.endDate).format('MMM Do YYYY');
+      const { name } = trip.countries[0].country;
+      const { flag } = trip.countries[0].country;
+      const { region } = trip.countries[0].country;
+      const { capital } = trip.countries[0].country;
+      res.render('trip-details', {
+        name,
+        flag,
+        region,
+        capital,
+        startDate,
+        endDate,
+      });
     })
     .catch((error) => {
       next(error);
@@ -132,7 +144,5 @@ router.post('/:id/delete', (req, res, next) => {
       next(error);
     });
 });
-
-
 
 module.exports = router;
