@@ -5,6 +5,7 @@ const { ObjectId } = Schema.Types;
 
 const tripSchema = new Schema({
   name: { type: String },
+  img: { type: String },
   users: [{ type: ObjectId, ref: 'User' }],
   countries: [{
     country: { type: ObjectId, ref: 'Country' },

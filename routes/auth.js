@@ -59,14 +59,42 @@ router.get('/login/instagram', async (req, res, next) => {
 
         const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);  
         // console.log(geocode.data.results[0].formatted_address);
-        const country = {
-          imageUrl: media.data.data[index].images.low_resolution.url,
-          country: geocode.data.results[0].formatted_address,
-        };
-        console.log(country);
-        visitedCountries.push(country);
+        if (geocode.data.results[0].formatted_address && media.data.data[index].images.low_resolution.url) {
+          const country = {
+            imageUrl: media.data.data[index].images.low_resolution.url,
+            name: geocode.data.results[0].formatted_address,
+          };
+          //console.log(country);
+          visitedCountries.push(country);
+        }
       }
     }
+
+    for (let index = 0; index < visitedCountries.length; index++) {
+      const countryDoc = await Country.findOne({name: visitedCountries[index].name});
+
+      console.log("country DOC", countryDoc);
+      
+    }
+
+
+
+    // const tripSchema = new Schema({
+    //   name: { type: String },
+    //   img: { type: String },
+    //   users: [{ type: ObjectId, ref: 'User' }],
+    //   countries: [{
+    //     country: { type: ObjectId, ref: 'Country' },
+    //     dates: {
+    //       startDate: { type: Date },
+    //       endDate: { type: Date },
+    //     },
+    //   }],
+    // }
+
+
+
+
 
     res.redirect('/travellog');
   } catch (error) {
