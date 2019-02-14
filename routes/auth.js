@@ -49,7 +49,7 @@ router.get('/login/instagram', async (req, res, next) => {
 
     // HOW TO PROTECT THE TOKEN????
     const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);  
-    //console.log(media.data.data);
+    console.log(media.data.data);
 
     const visitedCountries = [];
 
