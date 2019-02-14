@@ -18,7 +18,8 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { username, homeCountry } = req.body;
   const { _id } = req.session.currentUser;
-  const trimmedUsername = username.trim();
+  const sanitizedUsername = req.sanitize(username);
+  const trimmedUsername = sanitizedUsername.trim();
 
   if (username === '' || homeCountry === '') {
     return;
@@ -54,7 +55,7 @@ router.post('/', (req, res, next) => {
             .then(() => {
               // Update User session with new properties
               req.session.currentUser.username = trimmedUsername;
-              req.session.currentUser.homeCountry = homeCountry; 
+              req.session.currentUser.homeCountry = homeCountry;
               res.redirect('/travellog');
             })
             .catch((error) => {

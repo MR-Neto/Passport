@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const expressSanitizer = require('express-sanitizer');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 require("dotenv").config();
@@ -33,6 +34,7 @@ app.set('layout extractScripts', true);
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(expressSanitizer());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
