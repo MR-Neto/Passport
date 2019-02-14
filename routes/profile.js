@@ -35,6 +35,17 @@ router.post('/', (req, res, next) => {
       .catch((err) => {
         next(err);
       });
+  // In case you do not change the country of origin
+  } else if (!homeCountry) {
+    User.findByIdAndUpdate(_id, { username: trimmedUsername })
+      .then(() => {
+        // Update User session with new properties
+        req.session.currentUser.username = trimmedUsername;
+        res.redirect('/travellog');
+      })
+      .catch((err) => {
+        next(err);
+      });
   } else {
     User.findOne({ username: trimmedUsername })
       .then((user) => {
@@ -43,7 +54,7 @@ router.post('/', (req, res, next) => {
             .then(() => {
               // Update User session with new properties
               req.session.currentUser.username = trimmedUsername;
-              req.session.currentUser.homeCountry = homeCountry;
+              req.session.currentUser.homeCountry = homeCountry; 
               res.redirect('/travellog');
             })
             .catch((error) => {
