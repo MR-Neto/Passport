@@ -19,6 +19,7 @@
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "express-ejs-layouts": "^2.5.0",
+    "express-sanitizer": "^1.0.5",
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
     "mongoose": "^5.4.9",
