@@ -93,13 +93,17 @@ router.post('/login', (req, res, next) => {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/login');
   }
-  User.findOne({ username })
+  const sanitizedUsername = req.sanitize(username);
+  const sanitizedPassword = req.sanitize(password);
+  const trimmedUsername = sanitizedUsername.trim();
+  const trimmedPassword = sanitizedPassword.trim();
+  User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user || user === null) {
         req.flash('error', 'Incorrect user or password');
         res.redirect('/auth/login');
       }
-      if (bcrypt.compareSync(password, user.password)) {
+      if (bcrypt.compareSync(trimmedPassword, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
         res.redirect('/travellog');
@@ -127,18 +131,23 @@ router.get('/signup', loggedInRoute, (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const { username, password, homeCountry } = req.body;
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
 
   if (username === '' || password === '' || homeCountry === '') {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/signup');
   }
-  User.findOne({ username })
+  const sanitizedUsername = req.sanitize(username);
+  const sanitizedPassword = req.sanitize(password);
+  const trimmedUsername = sanitizedUsername.trim();
+  const trimmedPassword = sanitizedPassword.trim();
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(trimmedPassword, salt);
+
+  User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user) {
         User.create({
-          username,
+          username: trimmedUsername,
           password: hashPass,
           homeCountry,
         })
