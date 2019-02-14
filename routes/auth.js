@@ -4,6 +4,7 @@ const axios = require('axios');
 const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
+const Trip = require('../models/trip');
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 const loggedInRoute = require('../middlewares/loggedIn');
@@ -87,8 +88,12 @@ router.get('/login/instagram', async (req, res, next) => {
         })._id,
       }];
     }
-    console.log("VISITED COUNTRIES", visitedCountries);
+    //console.log("VISITED COUNTRIES", visitedCountries);
 
+
+    const createdTrips = await Trip.insertMany(visitedCountries);
+
+    console.log("Created Trips", createdTrips);
 
 
     // const tripSchema = new Schema({
