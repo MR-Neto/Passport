@@ -18,12 +18,12 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { username, homeCountry } = req.body;
   const { _id } = req.session.currentUser;
-  const sanitizedUsername = req.sanitize(username);
-  const trimmedUsername = sanitizedUsername.trim();
 
   if (username === '' || homeCountry === '') {
     return;
   }
+  const sanitizedUsername = req.sanitize(username);
+  const trimmedUsername = sanitizedUsername.trim();
 
   // In case you do not change the username
   if (req.session.currentUser.username === trimmedUsername) {

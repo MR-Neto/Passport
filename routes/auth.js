@@ -88,15 +88,15 @@ router.get('/login/instagram', async (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
-  const sanitizedUsername = req.sanitize(username);
-  const sanitizedPassword = req.sanitize(password);
-  const trimmedUsername = sanitizedUsername.trim();
-  const trimmedPassword = sanitizedPassword.trim();
 
   if (username === '' || password === '') {
     req.flash('info', 'Please fill all fields');
     res.redirect('/auth/login');
   }
+  const sanitizedUsername = req.sanitize(username);
+  const sanitizedPassword = req.sanitize(password);
+  const trimmedUsername = sanitizedUsername.trim();
+  const trimmedPassword = sanitizedPassword.trim();
   User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user || user === null) {
@@ -131,6 +131,11 @@ router.get('/signup', loggedInRoute, (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const { username, password, homeCountry } = req.body;
+
+  if (username === '' || password === '' || homeCountry === '') {
+    req.flash('info', 'Please fill all fields');
+    res.redirect('/auth/signup');
+  }
   const sanitizedUsername = req.sanitize(username);
   const sanitizedPassword = req.sanitize(password);
   const trimmedUsername = sanitizedUsername.trim();
@@ -138,10 +143,6 @@ router.post('/signup', (req, res, next) => {
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(trimmedPassword, salt);
 
-  if (username === '' || password === '' || homeCountry === '') {
-    req.flash('info', 'Please fill all fields');
-    res.redirect('/auth/signup');
-  }
   User.findOne({ username: trimmedUsername })
     .then((user) => {
       if (!user) {
