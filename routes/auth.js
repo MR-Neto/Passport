@@ -4,6 +4,9 @@ const axios = require('axios');
 const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
+const Trip = require('../models/trip');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 const loggedInRoute = require('../middlewares/loggedIn');
 require('dotenv').config();
 
@@ -20,7 +23,7 @@ router.get('/login/instagram', async (req, res, next) => {
   const { code } = req.query;
 
   try {
-    const result = await axios.post(
+    const tokenResult = await axios.post(
       'https://api.instagram.com/oauth/access_token',
       qs.stringify({
         client_id: process.env.CLIENT_ID,
@@ -30,11 +33,12 @@ router.get('/login/instagram', async (req, res, next) => {
         code,
       }),
     );
-    const { username, profile_picture } = result.data.user;
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(username, salt);
+    const { username, profile_picture } = tokenResult.data.user;
+    const token = tokenResult.data.access_token;
     const user = await User.findOne({ username });
     if (!user) {
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(username, salt);
       const userCreated = await User.create({
         username,
         password: hashPass,
@@ -42,11 +46,41 @@ router.get('/login/instagram', async (req, res, next) => {
         isCreatedFromInstagram: true,
       });
       req.session.currentUser = userCreated;
-      res.redirect('/travellog');
+
+      // HOW TO PROTECT THE TOKEN????
+      const media = await axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${token}`);
+
+      const instagramTrips = [];
+
+      for (let index = 0; index < media.data.data.length; index++) {
+        if (media.data.data[index].location) {
+          const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);
+          if (geocode.data.results.length > 0 && media.data.data[index].images.low_resolution.url) {
+            const trip = {
+              img: media.data.data[index].images.low_resolution.url,
+              name: geocode.data.results[0].formatted_address,
+              users: [ObjectId(req.session.currentUser._id)],
+            };
+            instagramTrips.push(trip);
+          }
+        }
+      }
+
+      const countries = await Country.find({});
+
+      for (let index = 0; index < instagramTrips.length; index++) {
+        instagramTrips[index].countries = [{
+          country: countries.find((country) => {
+            return country.name === instagramTrips[index].name;
+          })._id,
+        }];
+      }
+      const createdTrips = await Trip.insertMany(instagramTrips);
     } else {
       req.session.currentUser = user;
-      res.redirect('/travellog');
     }
+
+    res.redirect('/travellog');
   } catch (error) {
     next(error);
   }
