@@ -42,40 +42,51 @@
 
   var countriesUser =<%-JSON.stringify(countriesUser)%>
 
-  countriesUser.forEach((country)=>{
+  const restrictionUser = countriesUser.reduce((acc,cur,index)=>{
+    if(index === countriesUser.length - 1){
+      return acc + cur.name + `')"`;
+    }
+    else{
+      return acc + cur.name + `', '`;
+    }
+  },`"name in ('`);
 
-    const restriction = `"name = '${country.name}'"`;
-    const layer = new google.maps.FusionTablesLayer({
-      query: {
-        select: "'geometry'",
-        from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
-        where: restriction
-      }
-    });
-    layer.setMap(map);  
+  const layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: "'geometry'",
+      from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+      where: restrictionUser
+    }
   });
-
+  layer.setMap(map); 
 
   var countriesComparisonUser =<%-JSON.stringify(countriesComparisonUser)%>
 
-  countriesComparisonUser.forEach((country)=>{
-
-    const restriction = `"name = '${country.name}'"`;
-    const layer = new google.maps.FusionTablesLayer({
+  if(countriesComparisonUser.length>0){
+    const restrictionComparisonUser = countriesComparisonUser.reduce((acc,cur,index)=>{
+      if(index === countriesComparisonUser.length - 1){
+        return acc + cur.name + `')"`;
+      }
+      else{
+        return acc + cur.name + `', '`;
+      }
+    },`"name in ('`);
+    
+    const layerComparison = new google.maps.FusionTablesLayer({
       query: {
         select: "'geometry'",
         from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
-        where: restriction
+        where: restrictionComparisonUser
       },
       styles: [{
+        where: restrictionComparisonUser,
         polygonOptions: {
           fillColor: '#0800ff',
           fillOpacity: 0.3
         }
       }]
     });
-    layer.setMap(map);  
-  });
-
+    layerComparison.setMap(map); 
+  }
 
 </script>

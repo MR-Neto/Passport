@@ -18,23 +18,41 @@
 
   var countries =<%-JSON.stringify(countries)%>
 
+  const restriction = countries.reduce((acc,cur,index)=>{
+    if(index === countries.length - 1){
+      return acc + cur.name + `')"`;
+    }
+    else{
+      return acc + cur.name + `', '`;
+    }
+  },`"name in ('`);
+
+  console.log(restriction);
   
+  const layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: "'geometry'",
+      from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+      where: restriction
+    }
+  });
+  layer.setMap(map);  
 
   //SELECT ename WHERE ename IN ('Montreal', 'Quebec')
 
+  //`"name = '${country.name}'"`
 
-
-  countries.forEach((country)=>{
+  // countries.forEach((country)=>{
   
-    const restriction = `"name = '${country.name}'"`;
-    const layer = new google.maps.FusionTablesLayer({
-      query: {
-        select: "'geometry'",
-        from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
-        where: restriction
-      }
-    });
-    layer.setMap(map);  
-  });
+  //   const restriction = `"name = '${country.name}'"`;
+  //   const layer = new google.maps.FusionTablesLayer({
+  //     query: {
+  //       select: "'geometry'",
+  //       from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+  //       where: restriction
+  //     }
+  //   });
+  //   layer.setMap(map);  
+  // });
 
 </script>
