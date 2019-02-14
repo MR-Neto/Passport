@@ -60,16 +60,14 @@
   </div>
 
   <div class="container log">
-    <div class="trip-list">
-      <% trips.forEach((trip)=> { %>
-      <a href="/travellog/<%= trip.id %>" class="box" style="background: url(<%= trip.img %>) no-repeat center center; background-size: cover;">
-        <h3 class="title is-3"><%= trip.name %></h3>
-        <form action="/travellog/<%= trip.id %>/delete" method="POST">
-          <button class="remove-trip-btn delete is-medium" type="submit"></button>    
-        </form> 
-      </a>
-      <% }) %>
-    </div>
+    <% trips.forEach((trip)=> { %>
+    <a href="/travellog/<%= trip.id %>" class="box" style="background: url(<%= trip.img %>) no-repeat center center; background-size: cover;">
+      <h3 class="title is-3"><%= trip.name %></h3>
+      <form action="/travellog/<%= trip.id %>/delete" method="POST">
+        <button class="remove-trip-btn delete is-medium" type="submit"></button>    
+      </form> 
+    </a>
+    <% }) %>
   </div>
 </div>
 <script src="/js/setTripImage.js"></script>
