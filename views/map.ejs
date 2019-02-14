@@ -21,16 +21,14 @@
 
   var countries =<%-JSON.stringify(countries)%>
 
-  // countries.forEach((country)=>{
-  //   var marker = new google.maps.Marker({
-  //     position: {lat:country.location.coordinates[1] , lng:country.location.coordinates[0]},
-  //     map: map,
-  //     title: country.name
-  //   });
-  // });
+  
+
+  //SELECT ename WHERE ename IN ('Montreal', 'Quebec')
+
+
 
   countries.forEach((country)=>{
-
+  
     const restriction = `"name = '${country.name}'"`;
     const layer = new google.maps.FusionTablesLayer({
       query: {
@@ -41,7 +39,5 @@
     });
     layer.setMap(map);  
   });
-
-
 
 </script>

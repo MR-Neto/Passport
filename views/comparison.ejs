@@ -1,0 +1,81 @@
+<%- include partials/header.ejs %>
+
+
+<div id="comparison-search-bar">
+  <form action="/travellog/comparison" method="POST" class="comparison-form">
+    <a href="/travellog" class="button">
+      <span class="icon is-medium">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+    </a>
+    <div class="field">
+      <p class="control has-icons-left has-icons-right">
+        <input class="input" type="text" name="nameComparisonUser" placeholder="Type user to compare">
+        <span class="icon is-small is-left">
+         <i class="fas fa-user"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <p class="control save is-expanded">
+        <button class="button action" type="submit">
+          <span class="icon is-medium">
+            <i class="fas fa-search"></i>
+          </span>
+        </button>
+      </p> 
+    </div>
+  </form>
+</div>
+<div class="map-container-comparison">
+  <div id="map-comparison">
+
+  </div>
+</div>
+
+<script src=<%= GMAPAPIKEY %>></script>
+<script>
+  var map = new google.maps.Map(document.getElementById('map-comparison'), {
+    center: {lat: 51.509865, lng: -0.118092},
+    zoom: 2
+  });
+
+  var countriesUser =<%-JSON.stringify(countriesUser)%>
+
+  countriesUser.forEach((country)=>{
+
+    const restriction = `"name = '${country.name}'"`;
+    const layer = new google.maps.FusionTablesLayer({
+      query: {
+        select: "'geometry'",
+        from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+        where: restriction
+      }
+    });
+    layer.setMap(map);  
+  });
+
+
+  var countriesComparisonUser =<%-JSON.stringify(countriesComparisonUser)%>
+
+  countriesComparisonUser.forEach((country)=>{
+
+    const restriction = `"name = '${country.name}'"`;
+    const layer = new google.maps.FusionTablesLayer({
+      query: {
+        select: "'geometry'",
+        from: "1uAfX7SJvGuIo7mn4mXM1H7cGW07kHp5V1KIhlkxm",
+        where: restriction
+      },
+      styles: [{
+        polygonOptions: {
+          fillColor: '#0800ff',
+          fillOpacity: 0.3
+        }
+      }]
+    });
+    layer.setMap(map);  
+  });
+
+
+</script>
