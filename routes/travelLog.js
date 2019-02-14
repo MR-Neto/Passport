@@ -5,7 +5,7 @@ const Country = require('../models/country');
 const User = require('../models/user');
 const Trip = require('../models/trip');
 const Statistics = require('../helper/statistics');
-require("dotenv").config();
+require('dotenv').config();
 
 
 const router = express.Router();
@@ -56,8 +56,31 @@ router.post('/', (req, res, next) => {
       if (foundCountry) {
         const countryId = mongoose.Types.ObjectId(foundCountry._id);
 
+        let img = '';
+        switch (foundCountry.region) {
+          case 'Europe':
+            img = '../img/trip-europe.jpg';
+            break;
+          case 'Americas':
+            img = '../img/trip-americas.jpg';
+            break;
+          case 'Asia':
+            img = '../img/trip-asia.jpg';
+            break;
+          case 'Oceania':
+            img = '../img/trip-oceania.jpg';
+            break;
+          case 'Africa':
+            img = '../img/trip-africa.jpg';
+            break;
+          default:
+            img = '../img/trip-background.jpg';
+            break;
+        }
+
         return Trip.create({
           name: country,
+          img,
           users: [userId],
           countries: [{ country: countryId, dates: { startDate, endDate } }],
         });
