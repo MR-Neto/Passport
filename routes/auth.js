@@ -56,7 +56,7 @@ router.get('/login/instagram', async (req, res, next) => {
     for (let index = 0; index < media.data.data.length; index++) {
       console.log("media.data.data[index].location", media.data.data[index].location);
 
-      if (media.data.data[index].location.latitude && media.data.data[index].location.longitude) {
+      if (media.data.data[index].location) {
         // console.log('location object', media.data.data[index].location);
 
         const geocode = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${media.data.data[index].location.latitude},${media.data.data[index].location.longitude}&result_type=country&key=${process.env.GEOCODEAPIKEY}`);  
