@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 const axios = require('axios');
 const moment = require('moment');
+const User = require('../models/user');
 const Country = require('../models/country');
 const Trip = require('../models/trip');
 const Statistics = require('../helper/statistics');
