@@ -54,6 +54,8 @@ router.get('/login/instagram', async (req, res, next) => {
     const visitedCountries = [];
 
     for (let index = 0; index < media.data.data.length; index++) {
+      console.log("media.data.data[index].location", media.data.data[index].location);
+
       if (media.data.data[index].location.latitude && media.data.data[index].location.longitude) {
         // console.log('location object', media.data.data[index].location);
 
