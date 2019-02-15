@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 const axios = require('axios');
 const moment = require('moment');
+const idValidator = require('../middlewares/idValidation');
 const User = require('../models/user');
 const Country = require('../models/country');
 const Trip = require('../models/trip');
@@ -143,7 +144,7 @@ router.post('/comparison', async (req, res, next) => {
   res.render('comparison', { countriesUser, countriesComparisonUser, GMAPAPIKEY: process.env.GMAPAPIKEY });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', idValidator, (req, res, next) => {
   const { id } = req.params;
   Trip.findById(id).populate('countries.country')
     .then((trip) => {
@@ -167,7 +168,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.post('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', idValidator, (req, res, next) => {
   const tripId = req.params.id;
 
   Trip.findByIdAndDelete(tripId)

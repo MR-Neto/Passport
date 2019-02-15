@@ -1,11 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const mongoose = require('mongoose');
 const qs = require('query-string');
 const User = require('../models/user');
 const Country = require('../models/country');
 const Trip = require('../models/trip');
-const mongoose = require('mongoose');
+
 const { ObjectId } = mongoose.Types;
 const loggedInRoute = require('../middlewares/loggedIn');
 require('dotenv').config();

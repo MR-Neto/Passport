@@ -60,7 +60,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/travellog', protectedRoute, travelLogRouter);
@@ -68,22 +67,15 @@ app.use('/profile', protectedRoute, profileRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  console.log('YEASSSSS 1');
-  next(createError(404));
+  res.render('error/404');
 });
+
 
 // error handler
 app.use((error, req, res) => {
-  console.log('YEASSSSS 2');
-
   // Production mode
-  let message;
-  if (error.status === 404) {
-    message = 'You got lost wanderer...';
-    res.render('error', message);
-  } else if (error.status || 500) {
-    message = 'It seems our dear Passport broke. Try again later';
-    res.render('error', message);
+  if (error.status || 500) {
+    res.render('500');
   }
   // // set locals, only providing error in development
   // res.locals.message = error.message;
