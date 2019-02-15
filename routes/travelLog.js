@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { ObjectId } = mongoose.Types;
 const axios = require('axios');
 const moment = require('moment');
 const idValidator = require('../middlewares/idValidation');
@@ -8,8 +7,9 @@ const User = require('../models/user');
 const Country = require('../models/country');
 const Trip = require('../models/trip');
 const Statistics = require('../helper/statistics');
-require('dotenv').config();
 
+const { ObjectId } = mongoose.Types;
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -125,22 +125,14 @@ router.get('/comparison', async (req, res, next) => {
 
 router.post('/comparison', async (req, res, next) => {
   const user = req.session.currentUser._id;
-
   const { nameComparisonUser } = req.body;
-
   const tripsUser = await Trip.find({ users: user }).populate('countries.country');
-  console.log('Trips User: ', tripsUser);
   const countriesUser = Statistics.uniqueArray(Statistics.flattenArray(tripsUser));
-  console.log('Countries User: ', countriesUser);
   const comparisonUser = await User.find({ username: nameComparisonUser });
-  console.log('Comparison User ID: ', comparisonUser[0]._id);
   const tripsComparisonUser = await Trip
     .find({ users: comparisonUser[0]._id })
     .populate('countries.country');
-  console.log('Trips Comparison User: ', tripsComparisonUser);
   const countriesComparisonUser = Statistics.uniqueArray(Statistics.flattenArray(tripsComparisonUser));
-  console.log('Countries Comparison User: ', countriesComparisonUser);
-
   res.render('comparison', { countriesUser, countriesComparisonUser, GMAPAPIKEY: process.env.GMAPAPIKEY });
 });
 
