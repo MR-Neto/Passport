@@ -10,13 +10,13 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Countries visited</p>
-              <p><%= numOfCountries %></p>
+              <p class="ld ldt-slide-top-in"><%= numOfCountries %></p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Continents</p>
-              <p><%= numOfContinents %>/6</p>
+              <p class="ld ldt-slide-top-in"><%= numOfContinents %>/6</p>
             </div>
           </div>
         </nav>
@@ -26,16 +26,16 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Area covered</p>
-              <p><%= percentageArea %> %</p>
+              <p class="ld ldt-slide-top-in"><%= percentageArea %> %</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Last trip</p>
               <% if (lastVisitedCountryFlag === undefined) { %>
-              <p><i class="fab fa-font-awesome-flag"></i></p>
+              <p><i class="fab fa-font-awesome-flag ld ldt-slide-top-in"></i></p>
               <% } else { %>
-              <p><img src="<%= lastVisitedCountryFlag %>" alt="country-flag" width="50px" height="50px"></p>
+              <p><img class="ld ldt-slide-left-in" src="<%= lastVisitedCountryFlag %>" alt="country-flag" width="50px" height="50px"></p>
               <% } %>
             </div>
           </div>

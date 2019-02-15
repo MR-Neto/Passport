@@ -1,322 +1,322 @@
 /* ---- reset ---- */
 
 html {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 *, *:before, *:after {
-  box-sizing: inherit;
+box-sizing: inherit;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 }
 
 
 /* ---- typography ---- */
 
 body {
-  color: #111;
-  font-family: 'Lato', sans-serif;  font-size: 16px;
-  line-height: 147%;
+color: #111;
+font-family: 'Lato', sans-serif;  font-size: 16px;
+line-height: 147%;
 }
 
 #home-banner h1 {
-  font-family: 'Lato', sans-serif;  font-size: 16px;
-  color: #F7F5FB;
-  text-shadow: #111 0.5px 2px 16px;
-  font-weight: 700;
-  font-size: 2.5rem;
-  line-height: 3.2rem;
-  text-align: center;
+font-family: 'Lato', sans-serif;  font-size: 16px;
+color: #F7F5FB;
+text-shadow: #111 0.5px 2px 16px;
+font-weight: 700;
+font-size: 2.5rem;
+line-height: 3.2rem;
+text-align: center;
 }
 
 #home form label {
-  color: #F7F5FB;
+color: #F7F5FB;
 }
 
 #login h1 {
-  font-family: 'Zilla Slab', serif;
-  color: #F7F5FB;
-  font-weight: 700;
-  font-size: 3.5rem;
-  line-height: 2.2rem;
-  text-align: center;
-  margin-bottom: 4rem;
+font-family: 'Zilla Slab', serif;
+color: #F7F5FB;
+font-weight: 700;
+font-size: 3.5rem;
+line-height: 2.2rem;
+text-align: center;
+margin-bottom: 4rem;
 }
 
 #login p, #login label {
-  font-family: 'Lato', sans-serif;  font-size: 16px;
-  color: #F7F5FB;
-  font-weight: 400;
-  
+font-family: 'Lato', sans-serif;  font-size: 16px;
+color: #F7F5FB;
+font-weight: 400;
+
 }
 
 #travel-log h3 {
-  color: #F7F5FB;
-  text-shadow: #111 0.5px 2px 3px;
+color: #F7F5FB;
+text-shadow: #111 0.5px 2px 3px;
 }
 
 .error h1 { 
-  font-family: 'Zilla Slab', serif;
-  color: #363636;
-  font-weight: 700;
-  font-size: 5rem;
-  margin-bottom: 2rem;
+font-family: 'Zilla Slab', serif;
+color: #363636;
+font-weight: 700;
+font-size: 5rem;
+margin-bottom: 2rem;
 }
 
 .error p { 
-  font-family: 'Zilla Slab', serif;
-  color: #363636;
-  font-weight: 700;
-  font-size: 1.5rem;
+font-family: 'Zilla Slab', serif;
+color: #363636;
+font-weight: 700;
+font-size: 1.5rem;
 }
 
 p {
-  margin: 0;
+margin: 0;
 }
 
 .navbar-brand p {
-  font-family: 'Zilla Slab', serif;
-  color: #F7F5FB;
-  font-weight: 700;
-  font-size: 1.6rem;
+font-family: 'Zilla Slab', serif;
+color: #F7F5FB;
+font-weight: 700;
+font-size: 1.6rem;
 }
 
 /* ---- layout ---- */
 
 #home-banner {
-  background: url(../img/passport-banner.jpg) no-repeat center center; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 20rem;
-  margin-top: 3.25rem;
+background: url(../img/passport-banner.jpg) no-repeat center center; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+height: 20rem;
+margin-top: 3.25rem;
 }
 #home .modal-content form {
-  margin: 0 2rem;
+margin: 0 2rem;
 }
 #login {
-  background-color: #363636;
-  height: 100vh;
-  padding: 3rem 2rem;
+background-color: #363636;
+height: 100vh;
+padding: 3rem 2rem;
 }
 
 #login > .container {
-  max-width: 20rem;
+max-width: 20rem;
 }
 
 #signup {
-  margin-top: 3.25rem;
-  padding: 3rem 2rem;
+margin-top: 3.25rem;
+padding: 3rem 2rem;
 }
 
 #signup > .container {
-  max-width: 20rem;
+max-width: 20rem;
 }
 
 #signup .btn-instagram {
-  margin-top: 3.25rem;
+margin-top: 3.25rem;
 }
 
 #profile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3.25rem;
-  padding: 3rem 1rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 3.25rem;
+padding: 3rem 1rem;
 }
 
 #profile .form {
-  padding: 3rem 2rem;
+padding: 3rem 2rem;
 }
 
 #trip {
-  margin-top: 5.25rem;
+margin-top: 5.25rem;
 }
 
 #trip .form {
-  margin-top: 3.25rem;
-  padding: 3rem 2rem;
+margin-top: 3.25rem;
+padding: 3rem 2rem;
 }
 
 #trip-details {
-  margin-top: 5.25rem;
-  padding: 3rem 2rem;
+margin-top: 5.25rem;
+padding: 3rem 2rem;
 }
 
 #travel-log {
-  margin-top: 3.25rem;
+margin-top: 3.25rem;
 }
 
 #travel-log .columns {
-  width: 100%;
+width: 100%;
 }
 
 #travel-log h2 {
-  padding: 1rem 2rem;
+padding: 1rem 2rem;
 }
 
 .error .error-message {
-  position: relative;
-  top: 40vh;
-  left: 2vw;
-  text-align: center;
+position: relative;
+top: 40vh;
+left: 2vw;
+text-align: center;
 }
 
 /* ---- components ---- */
 
 #home-banner .button {
-  font-weight: 700;
-  margin-top: 1rem;
+font-weight: 700;
+margin-top: 1rem;
 }
 
 #signup .button {
-  margin-top: 1rem;
+margin-top: 1rem;
 }
 
 #login p:last-child>a {
-  color: #F7F5FB;
-  text-decoration: underline;
+color: #F7F5FB;
+text-decoration: underline;
 }
 
 .action {
-  background-color: #F58A07;
-  color: #F7F5FB;
-  border: none;
+background-color: #F58A07;
+color: #F7F5FB;
+border: none;
 }
 
 #login .button {
-  width: 100%;
-  margin-top: 1rem;
+width: 100%;
+margin-top: 1rem;
 }
 
 .instagram-container {
-  width: 100%;
+width: 100%;
 }
 
 .btn-instagram {
-  background-color: #517fa4;
-  color: #F7F5FB;
-  width: 100%;
-  border: none;
+background-color: #517fa4;
+color: #F7F5FB;
+width: 100%;
+border: none;
 }
 
 #travel-log .log .box {
-  height: 15rem;
-  width: 100%;
+height: 15rem;
+width: 100%;
 }
 
 #travel-log .log {
-  display: flex;
-  flex-direction: column-reverse;
-  padding: 2rem;
+display: flex;
+flex-direction: column-reverse;
+padding: 2rem;
 }
 
 #travel-log .field {
-  margin-top: 2rem;
-  margin-bottom: 0;
+margin-top: 2rem;
+margin-bottom: 0;
 }
 
 #travel-log .log a {
-  margin-top: 2rem;
-  margin-bottom: 0;
+margin-top: 2rem;
+margin-bottom: 0;
 }
 
 #travel-log form {
-  display: inline-block;
-  position: relative;
-  left: 94%;
-  bottom: 4.2rem;
+display: inline-block;
+position: relative;
+left: 94%;
+bottom: 4.2rem;
 }
 
 .container-homepage{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:center;
+display: flex;
+flex-wrap: wrap;
+justify-content:center;
 }
 
 .homepage-card{
-  margin: 1.5rem;
-  border-radius: 5%;
-  max-width: 400px;
+margin: 1.5rem;
+border-radius: 5%;
+max-width: 400px;
 }
 
 #homepage-card-image{
-  padding-top: 1.5rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
+padding-top: 1.5rem;
+padding-right: 1.5rem;
+padding-left: 1.5rem;
 }
 
 .homepage-card p{
-  text-align: center;
+text-align: center;
 }
 
 .homepage-card img{
-  width: 150px;
-  margin: 0 auto;
+width: 150px;
+margin: 0 auto;
 }
 
 #footer{
-  padding: 1rem;
+padding: 1rem;
 }
 
 /* ---- maps ---- */
 
 #map {
-  height: 100%;
+height: 100%;
 }
 
 .map-container{
-  height: 100vh;
-  width: 100vw;
+height: 100vh;
+width: 100vw;
 }
 
 #profile .save {
-  width: 78%;
+width: 78%;
 }
 
 #profile .delete-btn {
-  width: 22%;
+width: 22%;
 }
 
 .arrow {
-  position: absolute;
-  top: 4rem;
-  left: 0.5rem;
-  z-index: 1;
-  height: 3rem;
-  width: 3rem;
+position: absolute;
+top: 4rem;
+left: 0.5rem;
+z-index: 1;
+height: 3rem;
+width: 3rem;
 }
 
 #trip .button {
-  width: 30%;
+width: 30%;
 }
 
-#comparison-search-bar{
-  margin-top: 9vh;
-  display: flex;
+#comparison-search-bar {
+margin-top: 9vh;
+display: flex;
 
 }
 
-#comparison-search-bar .action{
-  z-index: 1;
+#comparison-search-bar .action {
+z-index: 1;
 }
 
-.comparison-form{
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+.comparison-form {
+display: flex;
+justify-content: space-around;
+width: 100%;
 }
 
 #map-comparison {
-  height: 100%;
+height: 100%;
 }
 
-.map-container-comparison{
-  height: 83vh;
-  width: 100vw;
+.map-container-comparison {
+height: 83vh;
+width: 100vw;
 }
 
