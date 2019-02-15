@@ -41,7 +41,8 @@
   });
 
   var countriesUser =<%-JSON.stringify(countriesUser)%>
-
+  
+  if(countriesUser.length>0){
   const restrictionUser = countriesUser.reduce((acc,cur,index)=>{
     if(index === countriesUser.length - 1){
       return acc + cur.name + `')"`;
@@ -59,6 +60,7 @@
     }
   });
   layer.setMap(map); 
+  }
 
   var countriesComparisonUser =<%-JSON.stringify(countriesComparisonUser)%>
 

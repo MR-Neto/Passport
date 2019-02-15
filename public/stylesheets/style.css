@@ -52,11 +52,24 @@ body {
   
 }
 
-h2 {}
-
 #travel-log h3 {
   color: #F7F5FB;
   text-shadow: #111 0.5px 2px 3px;
+}
+
+.error h1 { 
+  font-family: 'Zilla Slab', serif;
+  color: #363636;
+  font-weight: 700;
+  font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+.error p { 
+  font-family: 'Zilla Slab', serif;
+  color: #363636;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 p {
@@ -137,6 +150,13 @@ p {
   padding: 1rem 2rem;
 }
 
+.error .error-message {
+  position: relative;
+  top: 40vh;
+  left: 2vw;
+  text-align: center;
+}
+
 /* ---- components ---- */
 
 #home-banner .button {
@@ -171,23 +191,25 @@ p {
   border: none;
 }
 
-#travel-log .box {
+#travel-log .log .box {
   height: 15rem;
+  width: 100%;
 }
 
 #travel-log .log {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   padding: 2rem;
 }
 
 #travel-log .field {
   margin-top: 2rem;
+  margin-bottom: 0;
 }
 
-#travel-log .log>a {
+#travel-log .log a {
   margin-top: 2rem;
-  width: 5rem;
+  margin-bottom: 0;
 }
 
 #travel-log form {
