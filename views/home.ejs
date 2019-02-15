@@ -5,9 +5,7 @@
   <div class="modal">
     <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="container form">
-          <%- include partials/signup-form.ejs %>
-        </div>
+        <%- include partials/signup-form.ejs %>
         <button class="modal-close is-large" aria-label="close"></button>
       </div>
     </div>
@@ -18,7 +16,7 @@
     <div id="home-banner" class="hero-body">
       <div class="container">
         <% if(!currentUser) { %>
-        <h1 class="title is-1">Keep track of your trips with Passport.</h1>
+        <h1>Keep track of your trips with Passport.</h1>
         <div class="field is-grouped is-grouped-centered">
           <a class="button action" href="#">Sign Up</a>
         </div>
@@ -29,51 +27,26 @@
     </div>
   </div>
 
-  <div class="container-homepage">
-  <div class="card homepage-card">
-    <div class="card-image" id="homepage-card-image">
-      <figure class="image">
-        <img src="../img/passport.svg" alt="Passport image">
-      </figure>
+  <section class="section">
+    <div class="container">
+      <h4 class="title is-4">Keep your trips with Passport</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
     </div>
-    <div class="card-content">
-      <p class="title is-4 has-text-centered">Track your trips</p>
-      <div class="content has-text-centered">
-      Know how many countries and continents you have been.
-      </div>
-    </div>
-  </div>
-
-  <div class="card homepage-card">
-    <div class="card-image" id="homepage-card-image">
-      <figure class="image">
-        <img src="../img/map.svg" alt="Map image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <p class="title is-4 has-text-centered">Map your trips</p>
-      <div class="content has-text-centered	">
-        See where you and your friends been.
-      </div>
-    </div>
-  </div>
-
-  <div class="card homepage-card">
-    <div class="card-image" id="homepage-card-image">
-      <figure class="image">
-        <img src="../img/camera.svg" alt="Instagram image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <p class="title is-4 has-text-centered">Join with Instagram</p>
-      <div class="content has-text-centered">
-        Automatically create trips based on your Instagram account.
-      </div>
-    </div>
-  </div>
+  </section>
   
-  </div>
+  <section class="section">
+    <div class="container">
+      <h4 class="title is-4">Have a world view of your achievements</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+  </section>
   
-  
+  <section class="section">
+    <div class="container">
+      <h4 class="title is-4">Sign In with Instagram</h4>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    </div>
+  </section>
+</div>
 
 <%- include partials/footer.ejs%>

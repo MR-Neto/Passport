@@ -83,10 +83,6 @@ p {
   font-size: 1.6rem;
 }
 
-
-
-
-
 /* ---- layout ---- */
 
 #home-banner {
@@ -98,17 +94,26 @@ p {
   height: 20rem;
   margin-top: 3.25rem;
 }
-
+#home .modal-content form {
+  margin: 0 2rem;
+}
 #login {
   background-color: #363636;
   height: 100vh;
   padding: 3rem 2rem;
+}
 
+#login > .container {
+  max-width: 20rem;
 }
 
 #signup {
   margin-top: 3.25rem;
   padding: 3rem 2rem;
+}
+
+#signup > .container {
+  max-width: 20rem;
 }
 
 #signup .btn-instagram {
@@ -186,6 +191,10 @@ p {
 #login .button {
   width: 100%;
   margin-top: 1rem;
+}
+
+.instagram-container {
+  width: 100%;
 }
 
 .btn-instagram {
