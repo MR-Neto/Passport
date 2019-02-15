@@ -68,6 +68,10 @@ p {
   font-size: 1.6rem;
 }
 
+
+
+
+
 /* ---- layout ---- */
 
 #home-banner {
@@ -195,6 +199,37 @@ p {
   position: relative;
   left: 94%;
   bottom: 4.2rem;
+}
+
+.container-homepage{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.homepage-card{
+  margin: 1.5rem;
+  border-radius: 5%;
+  max-width: 400px;
+}
+
+#homepage-card-image{
+  padding-top: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.homepage-card p{
+  text-align: center;
+}
+
+.homepage-card img{
+  width: 150px;
+  margin: 0 auto;
+}
+
+#footer{
+  padding: 1rem;
 }
 
 /* ---- maps ---- */
