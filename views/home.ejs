@@ -1,14 +1,12 @@
 <%- include partials/header.ejs %>
 
 <div id="home">
-<!-- This modal only triggers on Sign Up button click -->
   <div class="modal">
     <div class="modal-background"></div>
       <div class="modal-content">
         <%- include partials/signup-form.ejs %>
         <button class="modal-close is-large" aria-label="close"></button>
       </div>
-    </div>
   </div>
   <!-- End of modal -->
 
@@ -28,23 +26,58 @@
   </div>
 
   <section class="section">
-    <div class="container">
-      <h4 class="title is-4">Keep your trips with Passport</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-128x128">
+          <img src="img/passport.svg" alt="Passport image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4 has-text-centered">Keep your trips with Passport</p>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        Save the trips in Passport and keep a record of them.
+      </div>
     </div>
-  </section>
-  
-  <section class="section">
-    <div class="container">
-      <h4 class="title is-4">Have a world view of your achievements</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-128x128">
+          <img src="img/map.svg" alt="Map image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4 has-text-centered">Have a world view of your achievements</p>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        Have a world view of your achievements and compare them with others.
+      </div>
     </div>
-  </section>
-  
-  <section class="section">
-    <div class="container">
-      <h4 class="title is-4">Sign In with Instagram</h4>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, recusandae fugit vel illum, omnis enim facilis, earum eveniet eius corrupti nobis aliquam maiores officia debitis totam a atque provident amet.</p>
+
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-128x128">
+          <img src="img/camera.svg" alt="Camera image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4 has-text-centered">Sign In with Instagram</p>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        Sign in directly with your Instagram account and import the places you have been.
+      </div>
     </div>
   </section>
 </div>
